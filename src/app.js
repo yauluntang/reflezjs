@@ -66,6 +66,14 @@ var HelloWorldLayer = cc.Layer.extend({
 
 
         var block = new MovingBlock(40);
+        block.onTouchDown( ()=>{
+            cc.Device.vibrate(1000);
+            console.log('click');
+        });
+
+        block.onTouchUp( ()=>{
+            console.log('click up');
+        });
         this.addChild(block);
         block.printInfo();
         block.setPosition(cc.p(200,200));
