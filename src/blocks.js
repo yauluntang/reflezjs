@@ -13,19 +13,21 @@ var MovingBlock = cc.Node.extend({
 
         let color = null;
         let width = this.width;
+        let height= this.height;
         if ( dark ){
             color = cc.color(255,255,255,255);
         }
         else {
             color = cc.color(255,255,255,128);
         }
-        this.drawNode.drawRect(cc.p( -width , -width ), cc.p( width, width ), color, 1 , color );
+        this.drawNode.drawRect(cc.p( -width , -height ), cc.p( width, height ), color, 1 , color );
     },
-    ctor:function ( width ) {
+    ctor:function ( width, height ) {
         this._super();
         this.touchDownCallback = null;
         this.touchUpCallback = null;
         this.width = width;
+        this.height = height;
         this.drawNode = cc.DrawNode.create();
         this.addChild(this.drawNode,100);
         this.drawBox(false);
@@ -56,7 +58,7 @@ var MovingBlock = cc.Node.extend({
           let handleTouch = (touch, event, move) =>{
             let target = event.getCurrentTarget();
             let locationInNode = target.convertToNodeSpace(touch.getLocation());
-            let rect = cc.rect(-width, -width, width * 2, width * 2);
+            let rect = cc.rect(-width, -height, width * 2, height * 2);
 
             if (cc.rectContainsPoint(rect, locationInNode)) {
               this.drawBox( true );

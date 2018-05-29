@@ -65,20 +65,27 @@ var HelloWorldLayer = cc.Layer.extend({
                        cc.color(255,255,255,128), 1 , cc.color(255,255,255,128) );
 
 
-        var block = new MovingBlock(40);
-        block.onTouchDown( ()=>{
-            cc.Device.vibrate(1000);
+        this.block = new MovingBlock(40,100);
+        this.block.onTouchDown( ()=>{
+            if ( cc.Device ) {
+                cc.Device.vibrate(1);
+            }
             console.log('click');
         });
 
-        block.onTouchUp( ()=>{
+        this.block.onTouchUp( ()=>{
             console.log('click up');
         });
-        this.addChild(block);
-        block.printInfo();
-        block.setPosition(cc.p(200,200));
+        this.addChild(this.block);
+        this.block.printInfo();
+        this.block.setPosition(cc.p(200,200));
 
+        this.scheduleUpdate();
         return true;
+    },
+    update: function(dt){
+        let y = this.block.getPosition().y
+        this.block.setPosition( cc.p(200,y+1) );
     }
 });
 
