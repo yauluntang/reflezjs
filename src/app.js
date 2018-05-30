@@ -42,7 +42,9 @@ var HelloWorldLayer = cc.Layer.extend({
         // create and initialize a label
 
 
-        var helloLabel = new cc.LabelTTF("Hello World "+size.width+" "+size.height, "Arial", 38);
+
+
+        var helloLabel = new cc.LabelTTF("Hello World "+size.width+" "+size.height, "Josefin Sans", size.width/15);
         // position the label on the center of the screen
         helloLabel.x = size.width / 2;
         helloLabel.y = size.height / 2 + 200;
@@ -68,7 +70,7 @@ var HelloWorldLayer = cc.Layer.extend({
         this.block = new MovingBlock(40,100);
         this.block.onTouchDown( ()=>{
             if ( cc.Device ) {
-                cc.Device.vibrate(1);
+                cc.Device.vibrate(100);
             }
             console.log('click');
         });

@@ -26,7 +26,7 @@ var res = {
     HelloWorld_png : "res/HelloWorld.png",
 };
 
-var g_resources = [];
+var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.ttf"], type:"font"}];
 for (var i in res) {
     g_resources.push(res[i]);
 }
