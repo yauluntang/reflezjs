@@ -28,7 +28,7 @@ var res = {
     rubik_fnt : "res/rubik.fnt"
 };
 
-var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.ttf"], type:"font"}];
+var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.eot","res/JosefinSans-Regular.ttf"], type:"font"}];
 for (var i in res) {
     g_resources.push(res[i]);
 }

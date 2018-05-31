@@ -30,6 +30,10 @@
 	<string>Copyright © 2013. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>res/JosefinSans-Regular.ttf</string>
+	</array>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
