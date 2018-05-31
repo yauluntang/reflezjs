@@ -76,6 +76,7 @@
  *
  */
 
+var gameFont = 'Josefin Sans';
 cc.game.onStart = function(){
     var sys = cc.sys;
     if(!sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
@@ -83,6 +84,10 @@ cc.game.onStart = function(){
 
     // Pass true to enable retina display, on Android disabled by default to improve performance
     cc.view.enableRetina(sys.os === sys.OS_IOS ? true : false);
+
+    if ( sys.os === sys.ANDROID ){
+        gameFont = 'res/JosefinSans-Regular.ttf'
+    }
 
     // Disable auto full screen on baidu and wechat, you might also want to eliminate sys.BROWSER_TYPE_MOBILE_QQ
     if (sys.isMobile &&
@@ -99,8 +104,14 @@ cc.game.onStart = function(){
 
     var width = cc.winSize.width;
     var height = cc.winSize.height;
+    if( !sys.isNative ){
+        width = window.innerWidth;
+        height = window.innerHeight;
+    }
 
     // Setup the resolution policy and design resolution size
+    //cc.view.setDesignResolutionSize(width, height, cc.ResolutionPolicy.SHOW_ALL);
+
     cc.view.setDesignResolutionSize(width, height, cc.ResolutionPolicy.SHOW_ALL);
 
     // The game will be resized when browser size change

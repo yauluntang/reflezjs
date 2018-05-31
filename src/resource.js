@@ -24,6 +24,8 @@
 
 var res = {
     HelloWorld_png : "res/HelloWorld.png",
+    rubik_png : "res/rubik.png",
+    rubik_fnt : "res/rubik.fnt"
 };
 
 var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.ttf"], type:"font"}];

@@ -15,21 +15,34 @@ var MovingBlock = cc.Node.extend({
         let width = this.width;
         let height= this.height;
         if ( dark ){
-            color = cc.color(255,255,255,255);
+            color = this.color;
         }
         else {
-            color = cc.color(255,255,255,128);
+            color = this.color2;
         }
         this.drawNode.drawRect(cc.p( -width , -height ), cc.p( width, height ), color, 1 , color );
     },
-    ctor:function ( width, height ) {
+    ctor:function ( width, height, number, color, color2 ) {
+
+
+
         this._super();
+
+        this.color = Util.hexToColor( color );
+        this.color2 = Util.hexToColor( color2 );
         this.touchDownCallback = null;
         this.touchUpCallback = null;
         this.width = width;
         this.height = height;
         this.drawNode = cc.DrawNode.create();
         this.addChild(this.drawNode,100);
+
+        var helloLabel = new cc.LabelTTF(""+number, gameFont, width);
+        // position the label on the center of the screen
+
+
+        this.addChild(helloLabel, 200);
+
         this.drawBox(false);
 
 /*

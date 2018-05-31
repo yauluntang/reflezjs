@@ -44,7 +44,7 @@ var HelloWorldLayer = cc.Layer.extend({
 
 
 
-        var helloLabel = new cc.LabelTTF("Hello World "+size.width+" "+size.height, "Josefin Sans", size.width/15);
+        var helloLabel = new cc.LabelTTF("Hello World "+size.width+" "+size.height, gameFont, size.width/15);
         // position the label on the center of the screen
         helloLabel.x = size.width / 2;
         helloLabel.y = size.height / 2 + 200;
@@ -59,15 +59,15 @@ var HelloWorldLayer = cc.Layer.extend({
         });
         this.addChild(this.sprite, 0);
 
-*/
+*//*
         this.drawNode = cc.DrawNode.create();
         this.addChild(this.drawNode,100);
         this.drawNode.clear();
         this.drawNode.drawRect(cc.p(0,0), cc.p(size.width,size.height),
                        cc.color(255,255,255,128), 1 , cc.color(255,255,255,128) );
-
-
-        this.block = new MovingBlock(40,100);
+*/
+        let number = 12;
+        this.block = new MovingBlock(40,40,number,'#FF0000FF','#FF0000AA');
         this.block.onTouchDown( ()=>{
             if ( cc.Device ) {
                 cc.Device.vibrate(100);
