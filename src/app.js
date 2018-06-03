@@ -23,6 +23,7 @@
  ****************************************************************************/
 
 
+
 var HelloWorldLayer = cc.Layer.extend({
     sprite:null,
     ctor:function () {
@@ -34,7 +35,7 @@ var HelloWorldLayer = cc.Layer.extend({
         // 2. add a menu item with "X" image, which is clicked to quit the program
         //    you may modify it.
         // ask the window size
-        var size = cc.winSize;
+        let size = cc.winSize;
 
         /////////////////////////////
         // 3. add your codes below...
@@ -42,14 +43,21 @@ var HelloWorldLayer = cc.Layer.extend({
         // create and initialize a label
 
 
+        this.helloLabel = new cc.LabelTTF("Hello World "+size.width+" "+size.height, gameFont, size.width/15);
+        // position the label on the center of the screen1
+        this.helloLabel.x = size.width / 2;
+        this.helloLabel.y = size.height / 2 + 200;
+        this.helloLabel.color = cc.color(0,0,0,255);
+        // add the label as a child to this layer
+        this.addChild(this.helloLabel, 200);
 
-
+        /*
         var helloLabel = new cc.LabelTTF("Hello World "+size.width+" "+size.height, gameFont, size.width/15);
         // position the label on the center of the screen
         helloLabel.x = size.width / 2;
         helloLabel.y = size.height / 2 + 200;
         // add the label as a child to this layer
-        this.addChild(helloLabel, 5);
+        this.addChild(helloLabel, 5);*/
 /*
         // add "HelloWorld" splash screen"
         this.sprite = new cc.Sprite(res.HelloWorld_png);
@@ -66,28 +74,86 @@ var HelloWorldLayer = cc.Layer.extend({
         this.drawNode.drawRect(cc.p(0,0), cc.p(size.width,size.height),
                        cc.color(255,255,255,128), 1 , cc.color(255,255,255,128) );
 */
-        let number = 12;
-        this.block = new MovingBlock(40,40,number,'#FF0000FF','#FF0000AA');
-        this.block.onTouchDown( ()=>{
-            if ( cc.Device ) {
-                cc.Device.vibrate(100);
-            }
-            console.log('click');
-        });
 
-        this.block.onTouchUp( ()=>{
-            console.log('click up');
-        });
-        this.addChild(this.block);
-        this.block.printInfo();
-        this.block.setPosition(cc.p(200,200));
+
+        this.drawNode = cc.DrawNode.create();
+        this.addChild(this.drawNode,100);
+        this.drawNode.clear();
+        this.drawNode.drawRect(cc.p(0,size.width), cc.p(size.width,size.height),
+            cc.color(255,255,255,216), 1 , cc.color(255,255,255,216) );
+
 
         this.scheduleUpdate();
+
+        this.blockSpawn = 0;
+
+        this.blocks = [];
+
         return true;
     },
+
+
+
     update: function(dt){
-        let y = this.block.getPosition().y
-        this.block.setPosition( cc.p(200,y+1) );
+
+        let size = cc.winSize;
+
+
+        let blockWidth = size.width / 20;
+
+
+        //this.helloLabel.setString(this.blockSpawn);
+        if ( this.blockSpawn <= 0 ) {
+            this.blockSpawn = 0.5;
+
+            let number = Util.randomInt(1,15);
+            let block = new MovingBlock(blockWidth,blockWidth,number,'#FF0000','#FF0000');
+            block.onTouchDown( ()=>{
+                if ( cc.Device ) {
+                    //cc.Device.vibrate(100);
+                }
+
+                block.fadeRemove();
+                console.log('click');
+            });
+
+            block.onTouchUp( ()=>{
+                console.log('click up');
+            });
+
+            let x = Util.randomInt(1,9);
+
+            block.setPosition(cc.p( x * size.width / 10, -size.width/10));
+            this.addChild(block,1);
+
+            this.blocks.push(block)
+
+
+        }
+
+        this.blockSpawn -= dt;
+
+        for ( let i = 0; i < this.blocks.length; i ++ ){
+            let b = this.blocks[i];
+            let y = b.getPosition().y;
+            let x = b.getPosition().x;
+            y += size.width/100;
+            b.setPosition(cc.p(x,y))
+
+            if ( y > size.height ){
+
+                let remove = this.blocks.splice(i, 1);
+                this.removeChild(remove[0],true);
+                i--;
+            }
+
+        }
+
+
+
+
+
+
     }
 });
 

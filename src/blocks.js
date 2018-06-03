@@ -15,12 +15,26 @@ var MovingBlock = cc.Node.extend({
         let width = this.width;
         let height= this.height;
         if ( dark ){
-            color = this.color;
+            color = Util.hexToColor( this.boxcolor, 180 );
         }
         else {
-            color = this.color2;
+            color = Util.hexToColor( this.boxcolor, 255 );
         }
         this.drawNode.drawRect(cc.p( -width , -height ), cc.p( width, height ), color, 1 , color );
+    },
+    fadeRemove: function(){
+
+
+        let fade = new cc.FadeOut(1);
+        let remove = new cc.RemoveSelf();
+        let seq = new cc.Sequence( fade, remove );
+
+        let fade2 = new cc.FadeOut(1);
+        let remove2 = new cc.RemoveSelf();
+        let seq2 = new cc.Sequence( fade2, remove2 );
+
+        this.helloLabel.runAction(seq);
+        this.drawNode.runAction(seq2);
     },
     ctor:function ( width, height, number, color, color2 ) {
 
@@ -28,8 +42,8 @@ var MovingBlock = cc.Node.extend({
 
         this._super();
 
-        this.color = Util.hexToColor( color );
-        this.color2 = Util.hexToColor( color2 );
+        this.boxcolor = color;
+        this.boxcolor2 = color2;
         this.touchDownCallback = null;
         this.touchUpCallback = null;
         this.width = width;
@@ -37,11 +51,11 @@ var MovingBlock = cc.Node.extend({
         this.drawNode = cc.DrawNode.create();
         this.addChild(this.drawNode,100);
 
-        var helloLabel = new cc.LabelTTF(""+number, gameFont, width);
+        this.helloLabel = new cc.LabelTTF(""+number, gameFont, width);
         // position the label on the center of the screen
 
 
-        this.addChild(helloLabel, 200);
+        this.addChild(this.helloLabel, 200);
 
         this.drawBox(false);
 
@@ -113,3 +127,4 @@ var MovingBlock = cc.Node.extend({
         console.log('test');
     }
 });
+

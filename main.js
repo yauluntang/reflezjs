@@ -105,8 +105,8 @@ cc.game.onStart = function(){
     var width = cc.winSize.width;
     var height = cc.winSize.height;
     if( !sys.isNative ){
-        width = window.innerWidth;
-        height = window.innerHeight;
+        //width = window.innerWidth;
+        //height = window.innerHeight;
     }
 
     // Setup the resolution policy and design resolution size
