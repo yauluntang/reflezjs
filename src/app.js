@@ -99,7 +99,7 @@ var HelloWorldLayer = cc.Layer.extend({
         let size = cc.winSize;
 
 
-        let blockWidth = size.width / 20;
+        let blockWidth = size.width / 10;
 
 
         //this.helloLabel.setString(this.blockSpawn);
@@ -121,9 +121,9 @@ var HelloWorldLayer = cc.Layer.extend({
                 console.log('click up');
             });
 
-            let x = Util.randomInt(1,9);
+            let x = Util.randomInt(1,6);
 
-            block.setPosition(cc.p( x * size.width / 10, -size.width/10));
+            block.setPosition(cc.p( x * size.width / 5, -size.width/10));
             this.addChild(block,1);
 
             this.blocks.push(block)
