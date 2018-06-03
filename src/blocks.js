@@ -9,7 +9,7 @@ var MovingBlock = cc.Node.extend({
         this.touchUpCallback = callback;
     },
     drawBox:function ( dark ){
-        this.drawNode.clear();
+        //this.drawNode.clear();
 
         let color = null;
         let width = this.width;
@@ -20,7 +20,8 @@ var MovingBlock = cc.Node.extend({
         else {
             color = Util.hexToColor( this.boxcolor, 255 );
         }
-        this.drawNode.drawRect(cc.p( -width , -height ), cc.p( width, height ), color, 1 , color );
+        this.sprite.color = color;
+        //this.drawNode.drawRect(cc.p( -width , -height ), cc.p( width, height ), color, 1 , color );
     },
     fadeRemove: function(){
 
@@ -34,7 +35,7 @@ var MovingBlock = cc.Node.extend({
         let seq2 = new cc.Sequence( fade2, remove2 );
 
         this.helloLabel.runAction(seq);
-        this.drawNode.runAction(seq2);
+        this.sprite.runAction(seq2);
     },
     ctor:function ( width, height, number, color, color2 ) {
 
@@ -48,8 +49,14 @@ var MovingBlock = cc.Node.extend({
         this.touchUpCallback = null;
         this.width = width;
         this.height = height;
-        this.drawNode = cc.DrawNode.create();
-        this.addChild(this.drawNode,100);
+        //this.drawNode = cc.DrawNode.create();
+        //this.addChild(this.drawNode,100);
+
+        this.sprite =
+        new cc.Sprite(res.one_png);
+        this.sprite.setScale(width,height);
+        this.addChild(this.sprite, 0);
+
 
         this.helloLabel = new cc.LabelTTF(""+number, gameFont, width);
         // position the label on the center of the screen

@@ -108,11 +108,12 @@ cc.game.onStart = function(){
         //width = window.innerWidth;
         //height = window.innerHeight;
     }
+    let aspect = height/width;
 
     // Setup the resolution policy and design resolution size
     //cc.view.setDesignResolutionSize(width, height, cc.ResolutionPolicy.SHOW_ALL);
 
-    cc.view.setDesignResolutionSize(480, 720, cc.ResolutionPolicy.SHOW_ALL);
+    cc.view.setDesignResolutionSize(480, 480*aspect, cc.ResolutionPolicy.SHOW_ALL);
 
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);

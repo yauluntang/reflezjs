@@ -23,8 +23,8 @@
  ****************************************************************************/
 
 var res = {
+    one_png : "res/FFFFFF-1.png",
     HelloWorld_png : "res/HelloWorld.png",
-    rubik_png : "res/rubik.png",
     rubik_fnt : "res/rubik.fnt"
 };
 
