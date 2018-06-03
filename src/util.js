@@ -1,5 +1,5 @@
 var Util = {}
-Util.hexToColor = (hex, alpha) =>{
+Util.hexToColor = function(hex, alpha){
     if ( alpha === undefined ){
         alpha = null;
     }
@@ -8,6 +8,6 @@ Util.hexToColor = (hex, alpha) =>{
         cc.color(parseInt(result[1], 16),parseInt(result[2], 16),parseInt(result[3], 16), alpha != null ? alpha: 255 )
      : null;
 }
-Util.randomInt =(min,max) =>{
+Util.randomInt = function(min,max) {
     return Math.floor(Math.random() * ( max - min + 1 ) + min);
 }

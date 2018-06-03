@@ -108,7 +108,7 @@ cc.game.onStart = function(){
         //width = window.innerWidth;
         //height = window.innerHeight;
     }
-    let aspect = height/width;
+    var aspect = height/width;
 
     // Setup the resolution policy and design resolution size
     //cc.view.setDesignResolutionSize(width, height, cc.ResolutionPolicy.SHOW_ALL);

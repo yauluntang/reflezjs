@@ -27,67 +27,20 @@
 var HelloWorldLayer = cc.Layer.extend({
     sprite:null,
     ctor:function () {
-        //////////////////////////////
-        // 1. super init first
         this._super();
-
-        /////////////////////////////
-        // 2. add a menu item with "X" image, which is clicked to quit the program
-        //    you may modify it.
-        // ask the window size
-        let size = cc.winSize;
-
-        /////////////////////////////
-        // 3. add your codes below...
-        // add a label shows "Hello World"
-        // create and initialize a label
-
-
-        this.helloLabel = new cc.LabelTTF("Hello World "+size.width+" "+size.height, gameFont, size.width/15);
-        // position the label on the center of the screen1
-        this.helloLabel.x = size.width / 2;
-        this.helloLabel.y = size.height / 2 + 200;
-        this.helloLabel.color = cc.color(0,0,0,255);
-        // add the label as a child to this layer
-        this.addChild(this.helloLabel, 200);
-
-        /*
-        var helloLabel = new cc.LabelTTF("Hello World "+size.width+" "+size.height, gameFont, size.width/15);
-        // position the label on the center of the screen
-        helloLabel.x = size.width / 2;
-        helloLabel.y = size.height / 2 + 200;
-        // add the label as a child to this layer
-        this.addChild(helloLabel, 5);*/
-/*
-        // add "HelloWorld" splash screen"
-        this.sprite = new cc.Sprite(res.HelloWorld_png);
-        this.sprite.attr({
-            x: size.width / 2,
-            y: size.height / 2
-        });
-        this.addChild(this.sprite, 0);
-
-*//*
-        this.drawNode = cc.DrawNode.create();
-        this.addChild(this.drawNode,100);
-        this.drawNode.clear();
-        this.drawNode.drawRect(cc.p(0,0), cc.p(size.width,size.height),
-                       cc.color(255,255,255,128), 1 , cc.color(255,255,255,128) );
-*/
-
-
-        this.drawNode = cc.DrawNode.create();
-        this.addChild(this.drawNode,100);
-        this.drawNode.clear();
-        this.drawNode.drawRect(cc.p(0,size.width), cc.p(size.width,size.height),
-            cc.color(255,255,255,216), 1 , cc.color(255,255,255,216) );
-
 
         this.scheduleUpdate();
 
         this.blockSpawn = 0;
-
         this.blocks = [];
+        this.header = new HeaderLayer();
+        this.addChild( this.header,100 );
+
+        this.calclayer = new CalcLayer();
+        this.addChild( this.calclayer,100 );
+
+
+        this.calclayer.setSumnum( Util.randomInt(10,30) );
 
         return true;
     },
@@ -96,34 +49,57 @@ var HelloWorldLayer = cc.Layer.extend({
 
     update: function(dt){
 
-        let size = cc.winSize;
+        var size = cc.winSize;
 
 
-        let blockWidth = 30;
+        var blockWidth = 70;
+        var rows = 6;
+        var width = size.width / rows;
 
 
-        //this.helloLabel.setString(this.blockSpawn);
         if ( this.blockSpawn <= 0 ) {
             this.blockSpawn = 0.5;
 
-            let number = Util.randomInt(1,15);
-            let block = new MovingBlock(blockWidth,blockWidth,number,'#FF0000','#FF0000');
-            block.onTouchDown( ()=>{
-                if ( cc.Device ) {
-                    //cc.Device.vibrate(100);
+            var number = Util.randomInt(1,10);
+            var block = new MovingBlock(blockWidth,blockWidth,number,'#FF0000','#FF0000');
+
+            var touchDownFunc = function() {
+                cc.audioEngine.playEffect(res.click_wav);
+                block.fadeRemove();
+                var number = block.getNumber();
+                this.calclayer.addBlock(blockWidth, width, number);
+
+                if (this.calclayer.calcSum > this.calclayer.sumNumber) {
+                    this.calclayer.setSumnum(Util.randomInt(10, 30));
+                    this.calclayer.clearBlocks();
+                    this.calclayer.popCheck();
+                    cc.audioEngine.playEffect(res.error_wav);
+                }
+                if (this.calclayer.calcBlock >= 5 && this.calclayer.calcSum !== this.calclayer.sumNumber) {
+                    this.calclayer.setSumnum(Util.randomInt(10, 30));
+                    this.calclayer.clearBlocks();
+                    this.calclayer.popCheck();
+                    cc.audioEngine.playEffect(res.error_wav);
                 }
 
-                block.fadeRemove();
-                console.log('click');
-            });
+                if (this.calclayer.calcSum === this.calclayer.sumNumber) {
+                    this.calclayer.setSumnum(Util.randomInt(15, 30));
+                    this.calclayer.clearBlocks();
 
-            block.onTouchUp( ()=>{
-                console.log('click up');
-            });
+                    this.calclayer.popCheck(true);
 
-            let x = Util.randomInt(1,4);
+                    cc.audioEngine.playEffect(res.ding_wav);
+                }
+            }
 
-            block.setPosition(cc.p( x * size.width / 5, -size.width/10));
+
+            var that = this;
+            block.onTouchDown( function(){ touchDownFunc.call(that) } );
+
+
+            var x = Util.randomInt(1,rows);
+
+            block.setPosition(cc.p( x * size.width / rows - size.width / rows / 2, -size.width/10));
             this.addChild(block,1);
 
             this.blocks.push(block)
@@ -133,16 +109,16 @@ var HelloWorldLayer = cc.Layer.extend({
 
         this.blockSpawn -= dt;
 
-        for ( let i = 0; i < this.blocks.length; i ++ ){
-            let b = this.blocks[i];
-            let y = b.getPosition().y;
-            let x = b.getPosition().x;
+        for ( var i = 0; i < this.blocks.length; i ++ ){
+            var b = this.blocks[i];
+            var y = b.getPosition().y;
+            var x = b.getPosition().x;
             y += size.width/100;
             b.setPosition(cc.p(x,y))
 
             if ( y > size.height ){
 
-                let remove = this.blocks.splice(i, 1);
+                var remove = this.blocks.splice(i, 1);
                 this.removeChild(remove[0],true);
                 i--;
             }

@@ -24,8 +24,12 @@
 
 var res = {
     one_png : "res/FFFFFF-1.png",
-    HelloWorld_png : "res/HelloWorld.png",
-    rubik_fnt : "res/rubik.fnt"
+    rubik_fnt : "res/rubik.fnt",
+    click_wav: "res/click.wav",
+    ding_wav: "res/ding.wav",
+    error_wav: "res/error.wav",
+    check_png: "res/checkmark-256.png",
+    x_png: "res/x-mark-256.png",
 };
 
 var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.eot","res/JosefinSans-Regular.ttf"], type:"font"}];

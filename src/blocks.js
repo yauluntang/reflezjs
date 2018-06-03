@@ -11,9 +11,9 @@ var MovingBlock = cc.Node.extend({
     drawBox:function ( dark ){
         //this.drawNode.clear();
 
-        let color = null;
-        let width = this.width;
-        let height= this.height;
+        var color = null;
+        var width = this.width;
+        var height= this.height;
         if ( dark ){
             color = Util.hexToColor( this.boxcolor, 180 );
         }
@@ -26,16 +26,20 @@ var MovingBlock = cc.Node.extend({
     fadeRemove: function(){
 
 
-        let fade = new cc.FadeOut(1);
-        let remove = new cc.RemoveSelf();
-        let seq = new cc.Sequence( fade, remove );
+        var fade = new cc.FadeOut(0.1);
+        var remove = new cc.RemoveSelf();
+        var seq = new cc.Sequence( fade, remove );
 
-        let fade2 = new cc.FadeOut(1);
-        let remove2 = new cc.RemoveSelf();
-        let seq2 = new cc.Sequence( fade2, remove2 );
+        var fade2 = new cc.FadeOut(0.1);
+        var remove2 = new cc.RemoveSelf();
+        var seq2 = new cc.Sequence( fade2, remove2 );
 
         this.helloLabel.runAction(seq);
         this.sprite.runAction(seq2);
+        this.removed = true;
+    },
+    getNumber: function(){
+        return this.number;
     },
     ctor:function ( width, height, number, color, color2 ) {
 
@@ -43,6 +47,8 @@ var MovingBlock = cc.Node.extend({
 
         this._super();
 
+        this.removed = false;
+        this.number = number;
         this.boxcolor = color;
         this.boxcolor2 = color2;
         this.touchDownCallback = null;
@@ -57,8 +63,15 @@ var MovingBlock = cc.Node.extend({
         this.sprite.setScale(width,height);
         this.addChild(this.sprite, 0);
 
-
-        this.helloLabel = new cc.LabelTTF(""+number, gameFont, width);
+        /*
+        this.drawNode = cc.DrawNode.create();
+        this.addChild(this.drawNode,100);
+        this.drawNode.clear();
+        this.drawNode.drawRect(cc.p(-width,-height), cc.p(width,height),
+            cc.color(255,255,255,216), 1 , cc.color(255,255,255,216) );
+        this.addChild(this.drawNode);
+*/
+        this.helloLabel = new cc.LabelTTF(""+number, gameFont, width*0.8);
         // position the label on the center of the screen
 
 
@@ -89,10 +102,16 @@ var MovingBlock = cc.Node.extend({
 
           }), this );
 */
-          let handleTouch = (touch, event, move) =>{
-            let target = event.getCurrentTarget();
-            let locationInNode = target.convertToNodeSpace(touch.getLocation());
-            let rect = cc.rect(-width, -height, width * 2, height * 2);
+
+            var that = this;
+          var handleTouch = function(touch, event, move){
+
+              if ( this.removed ){
+                  return false;
+              }
+            var target = event.getCurrentTarget();
+            var locationInNode = target.convertToNodeSpace(touch.getLocation());
+            var rect = cc.rect(-width/2, -height/2, width, height);
 
             if (cc.rectContainsPoint(rect, locationInNode)) {
               this.drawBox( true );
@@ -105,7 +124,10 @@ var MovingBlock = cc.Node.extend({
               return false;
             }
           }
-          let handleTouchOut = (touch, event) =>{
+          var handleTouchOut = function(touch, event){
+              if ( this.removed ){
+                  return false;
+              }
             this.drawBox( false );
             if ( this.touchUpCallback ) {
                 this.touchUpCallback( touch, event );
@@ -117,14 +139,14 @@ var MovingBlock = cc.Node.extend({
           cc.eventManager.addListener( cc.EventListener.create({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
               swallowTouches: true,
-              onTouchBegan: (touch, event)=> {
-                return handleTouch( touch, event );
+              onTouchBegan: function(touch, event) {
+                return handleTouch.call (that, touch, event );
               },
-              onTouchMoved: (touch, event) => {
-                return handleTouch( touch, event, true );
+              onTouchMoved: function(touch, event) {
+                return handleTouch.call( that,touch, event, true );
               },
-              onTouchEnded: (touch, event) => {
-                return handleTouchOut( touch, event );
+              onTouchEnded: function(touch, event)  {
+                return handleTouchOut.call( that,touch, event );
               }
 
             }), this );
