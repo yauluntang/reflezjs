@@ -116,7 +116,7 @@ var MovingBlock = cc.Node.extend({
             if (cc.rectContainsPoint(rect, locationInNode)) {
               this.drawBox( true );
               if ( this.touchDownCallback && !move ) {
-                  this.touchDownCallback(touch, event);
+                  this.touchDownCallback(touch, event, this);
               }
               return true;
             } else {
@@ -130,7 +130,7 @@ var MovingBlock = cc.Node.extend({
               }
             this.drawBox( false );
             if ( this.touchUpCallback ) {
-                this.touchUpCallback( touch, event );
+                this.touchUpCallback( touch, event, this );
             }
 
             return false;

@@ -49,7 +49,7 @@ var HelloWorldLayer = cc.Layer.extend({
 
         this.calclayer.setSumnum( Util.randomInt(10,30) );
 
-        cc.audioEngine.playMusic(res.mariokart_mp3, true);
+        //cc.audioEngine.playMusic(res.mariokart_mp3, true);
 
         return true;
     },
@@ -61,63 +61,66 @@ var HelloWorldLayer = cc.Layer.extend({
         var size = cc.winSize;
 
 
-        var blockWidth = 70;
-        var rows = 6;
+        var blockWidth = 80;
+        var rows = 5;
         var width = size.width / rows;
 
 
         if ( this.blockSpawn <= 0 ) {
-            this.blockSpawn = 0.5;
+            this.blockSpawn = 0.8;
 
-            var number = Util.randomInt(1,10);
-            var block = new MovingBlock(blockWidth,blockWidth,number,'#FF0000','#FF0000');
 
-            var touchDownFunc = function() {
 
-                var actions = false;
-                block.fadeRemove();
-                var number = block.getNumber();
-                this.calclayer.addBlock(blockWidth, width, number);
 
-                if (this.calclayer.calcSum > this.calclayer.sumNumber) {
-                    this.calclayer.setSumnum(Util.randomInt(10, 30));
-                    this.calclayer.clearBlocks();
-                    this.calclayer.popCheck();
-                    cc.audioEngine.playEffect(res.error_wav);
-                    actions = true;
-                }
-                if (this.calclayer.calcBlock >= 5 && this.calclayer.calcSum !== this.calclayer.sumNumber) {
-                    this.calclayer.setSumnum(Util.randomInt(10, 30));
-                    this.calclayer.clearBlocks();
-                    this.calclayer.popCheck();
-                    cc.audioEngine.playEffect(res.error_wav);
-                    actions = true;
-                }
-
-                if (this.calclayer.calcSum === this.calclayer.sumNumber) {
-                    this.calclayer.setSumnum(Util.randomInt(15, 30));
-                    this.calclayer.clearBlocks();
-                    this.calclayer.popCheck(true);
-                    cc.audioEngine.playEffect(res.ding_wav);
-                    actions = true;
-                }
-
-                if ( !actions )
-                    cc.audioEngine.playEffect(res.click_wav);
-
-            }
 
 
             var that = this;
-            block.onTouchDown( function(){ touchDownFunc.call(that) } );
 
 
-            var x = Util.randomInt(1,rows);
 
-            block.setPosition(cc.p( x * size.width / rows - size.width / rows / 2, -size.width/10));
-            this.addChild(block,1);
+            for ( var x = 1; x <= rows; x ++ ) {
 
-            this.blocks.push(block)
+                var number = Util.randomInt(1,10);
+                var block = new MovingBlock(blockWidth,blockWidth,number,'#FF0000','#FF0000');
+
+                var touchDownFunc = function touchDownFunc( block ) {
+                    var actions = false;
+                    block.fadeRemove();
+                    var number = block.getNumber();
+                    this.calclayer.addBlock(blockWidth, width, number);
+                    if (this.calclayer.calcSum > this.calclayer.sumNumber) {
+                        this.calclayer.setSumnum(Util.randomInt(10, 30));
+                        this.calclayer.clearBlocks();
+                        this.calclayer.popCheck();
+                        cc.audioEngine.playEffect(res.error_wav);
+                        actions = true;
+                    }
+                    if (this.calclayer.calcBlock >= 5 && this.calclayer.calcSum !== this.calclayer.sumNumber) {
+                        this.calclayer.setSumnum(Util.randomInt(10, 30));
+                        this.calclayer.clearBlocks();
+                        this.calclayer.popCheck();
+                        cc.audioEngine.playEffect(res.error_wav);
+                        actions = true;
+                    }
+
+                    if (this.calclayer.calcSum === this.calclayer.sumNumber) {
+                        this.calclayer.setSumnum(Util.randomInt(15, 30));
+                        this.calclayer.clearBlocks();
+                        this.calclayer.popCheck(true);
+                        cc.audioEngine.playEffect(res.ding_wav);
+                        actions = true;
+                    }
+
+                    if ( !actions )
+                        cc.audioEngine.playEffect(res.click_wav);
+                }
+
+
+                block.onTouchDown( function( touch, event, thisblock ){ touchDownFunc.call(that, thisblock) } );
+                block.setPosition(cc.p(x * size.width / rows - size.width / rows / 2, -size.width / 10));
+                this.addChild(block, 1);
+                this.blocks.push(block);
+            }
 
 
         }
