@@ -9,12 +9,13 @@ var HeaderLayer = cc.Layer.extend({
 
 
 
-        this.helloLabel = new cc.LabelTTF("Sum Fun", gameFont, size.width/20, cc.size(size.width-20, 40), cc.TEXT_ALIGNMENT_LEFT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+        this.helloLabel = new cc.LabelTTF("Sum Fun", gameFont, size.width/10, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
         //this.helloLabel.setHorizontalAlignment( cc.TEXT_ALIGNMENT_LEFT );
         this.helloLabel.x = size.width / 2;
         this.helloLabel.y = 20;
         //this.helloLabel.setContentSize( size.width, 40 );
         this.helloLabel.color = cc.color(0,0,0,255);
+        this.helloLabel.setScale(0.5);
         // add the label as a child to this layer
         this.addChild(this.helloLabel, 200);
 

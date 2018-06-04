@@ -62,8 +62,9 @@ var CalcLayer = cc.Layer.extend({
 
 
 
-        this.helloLabel = new cc.LabelTTF("", gameFont, size.width/8, cc.size(size.width - 20, 100), cc.TEXT_ALIGNMENT_RIGHT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+        this.helloLabel = new cc.LabelTTF("", gameFont, size.width/4, cc.size(size.width * 2 - 20, 200), cc.TEXT_ALIGNMENT_RIGHT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
+        this.helloLabel.setScale(0.5);
         this.helloLabel.x = size.width / 2;
         this.helloLabel.y = 50;
         this.helloLabel.color = cc.color(0,0,0,255);
