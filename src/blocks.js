@@ -111,7 +111,7 @@ var MovingBlock = cc.Node.extend({
               }
             var target = event.getCurrentTarget();
             var locationInNode = target.convertToNodeSpace(touch.getLocation());
-            var rect = cc.rect(-width/2, -height/2, width, height);
+            var rect = cc.rect(-width/2 -20, -height/2 -20, width + 40, height + 40);
 
             if (cc.rectContainsPoint(rect, locationInNode)) {
               this.drawBox( true );

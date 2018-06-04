@@ -42,7 +42,7 @@ var CalcLayer = cc.Layer.extend({
             check = new cc.Sprite(res.x_png);
         check.setScale(0.5);
         this.addChild(check,300);
-        check.setPosition(size.width/2, size.height- 85);
+        check.setPosition(size.width/2, 50);
 
         var fade = new cc.FadeOut(1);
         var scaleby = new cc.ScaleBy(1,1.5);
