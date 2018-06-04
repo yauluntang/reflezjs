@@ -71,7 +71,8 @@ var HelloWorldLayer = cc.Layer.extend({
             var block = new MovingBlock(blockWidth,blockWidth,number,'#FF0000','#FF0000');
 
             var touchDownFunc = function() {
-                cc.audioEngine.playEffect(res.click_wav);
+
+                var actions = false;
                 block.fadeRemove();
                 var number = block.getNumber();
                 this.calclayer.addBlock(blockWidth, width, number);
@@ -81,22 +82,27 @@ var HelloWorldLayer = cc.Layer.extend({
                     this.calclayer.clearBlocks();
                     this.calclayer.popCheck();
                     cc.audioEngine.playEffect(res.error_wav);
+                    actions = true;
                 }
                 if (this.calclayer.calcBlock >= 5 && this.calclayer.calcSum !== this.calclayer.sumNumber) {
                     this.calclayer.setSumnum(Util.randomInt(10, 30));
                     this.calclayer.clearBlocks();
                     this.calclayer.popCheck();
                     cc.audioEngine.playEffect(res.error_wav);
+                    actions = true;
                 }
 
                 if (this.calclayer.calcSum === this.calclayer.sumNumber) {
                     this.calclayer.setSumnum(Util.randomInt(15, 30));
                     this.calclayer.clearBlocks();
-
                     this.calclayer.popCheck(true);
-
                     cc.audioEngine.playEffect(res.ding_wav);
+                    actions = true;
                 }
+
+                if ( !actions )
+                    cc.audioEngine.playEffect(res.click_wav);
+
             }
 
 
