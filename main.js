@@ -99,9 +99,7 @@ cc.game.onStart = function(){
     // Adjust viewport meta
     cc.view.adjustViewPort(true);
 
-    if ( sys.os === sys.OS_IOS ) {
-        console.log(cc.view.getSafeAreaRect());
-    }
+
 
     // Uncomment the following line to set a fixed orientation for your game
     cc.view.setOrientation(cc.ORIENTATION_PORTRAIT);
@@ -109,6 +107,12 @@ cc.game.onStart = function(){
     var width = cc.winSize.width;
     var height = cc.winSize.height;
 
+
+    if ( sys.os === sys.OS_IOS ) {
+        var rect = cc.view.getSafeAreaRect();
+        width = rect.size.width;
+        height = rect.size.height;
+    }
 
     if( !sys.isNative ){
         //width = window.innerWidth;
@@ -119,7 +123,7 @@ cc.game.onStart = function(){
     // Setup the resolution policy and design resolution size
     //cc.view.setDesignResolutionSize(width, height, cc.ResolutionPolicy.SHOW_ALL);
 
-    cc.view.setDesignResolutionSize(480, 720, cc.ResolutionPolicy.SHOW_ALL);
+    cc.view.setDesignResolutionSize(480, 480*aspect, cc.ResolutionPolicy.SHOW_ALL);
 
     // The game will be resized when browser size change
     cc.view.resizeWithBrowserSize(true);
