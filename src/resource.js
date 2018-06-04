@@ -29,6 +29,7 @@ var res = {
     error_wav: "res/error.wav",
     check_png: "res/checkmark-256.png",
     x_png: "res/x-mark-256.png",
+    mariokart_mp3: "res/mariokart.mp3"
 };
 
 var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.eot","res/JosefinSans-Regular.ttf"], type:"font"}];

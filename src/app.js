@@ -49,6 +49,8 @@ var HelloWorldLayer = cc.Layer.extend({
 
         this.calclayer.setSumnum( Util.randomInt(10,30) );
 
+        cc.audioEngine.playMusic(res.mariokart_mp3, true);
+
         return true;
     },
 
