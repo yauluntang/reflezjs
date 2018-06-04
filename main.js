@@ -110,8 +110,8 @@ cc.game.onStart = function(){
 
     if ( sys.os === sys.OS_IOS ) {
         var rect = cc.view.getSafeAreaRect();
-        width = rect.size.width;
-        height = rect.size.height;
+        width = rect.width;
+        height = rect.height;
     }
 
     if( !sys.isNative ){
