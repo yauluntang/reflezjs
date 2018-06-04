@@ -99,6 +99,10 @@ cc.game.onStart = function(){
     // Adjust viewport meta
     cc.view.adjustViewPort(true);
 
+    if ( sys.os === sys.OS_IOS ) {
+        console.log(cc.view.getSafeAreaRect());
+    }
+
     // Uncomment the following line to set a fixed orientation for your game
     cc.view.setOrientation(cc.ORIENTATION_PORTRAIT);
 
