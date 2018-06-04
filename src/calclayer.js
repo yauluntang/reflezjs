@@ -9,7 +9,7 @@ var CalcLayer = cc.Layer.extend({
         var size = cc.winSize;
         var block = new MovingBlock(blockWidth,blockWidth,number,'#FF0000','#FF0000');
         this.addChild( block, 200 );
-        block.setPosition( width/2 + this.bx,  size.height - 35 - width / 2);
+        block.setPosition( width/2 + this.bx,  50);
 
         this.bx += width;
         this.calcBlock ++;
@@ -62,10 +62,10 @@ var CalcLayer = cc.Layer.extend({
 
 
 
-        this.helloLabel = new cc.LabelTTF("", gameFont, size.width/8, cc.size(size.width - 20,100), cc.TEXT_ALIGNMENT_RIGHT);
+        this.helloLabel = new cc.LabelTTF("", gameFont, size.width/8, cc.size(size.width - 20, 100), cc.TEXT_ALIGNMENT_RIGHT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
         this.helloLabel.x = size.width / 2;
-        this.helloLabel.y = size.height - 85;
+        this.helloLabel.y = 50;
         this.helloLabel.color = cc.color(0,0,0,255);
         this.addChild(this.helloLabel,300);
 
@@ -73,7 +73,7 @@ var CalcLayer = cc.Layer.extend({
         this.addChild(this.drawNode,100);
         this.drawNode.clear();
         var color = Util.hexToColor('#ffffff', 220);
-        this.drawNode.drawRect(cc.p(0,size.height-135), cc.p(size.width,size.height-35), color, 1 ,color );
+        this.drawNode.drawRect(cc.p(0,0), cc.p(size.width,100), color, 1 ,color );
         return true;
     },
 

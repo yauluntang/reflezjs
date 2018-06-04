@@ -71,7 +71,7 @@ var MovingBlock = cc.Node.extend({
             cc.color(255,255,255,216), 1 , cc.color(255,255,255,216) );
         this.addChild(this.drawNode);
 */
-        this.helloLabel = new cc.LabelTTF(""+number, gameFont, width*0.8);
+        this.helloLabel = new cc.LabelTTF(""+number, gameFont, width*0.8, cc.size(width,height), cc.TEXT_ALIGNMENT_CENTER, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
         // position the label on the center of the screen
 
 

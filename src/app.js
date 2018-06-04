@@ -28,7 +28,7 @@ var HelloWorldLayer = cc.Layer.extend({
     sprite:null,
     ctor:function () {
         this._super();
-
+        var size = cc.winSize;
         this.scheduleUpdate();
 
         this.blockSpawn = 0;
@@ -36,8 +36,15 @@ var HelloWorldLayer = cc.Layer.extend({
         this.header = new HeaderLayer();
         this.addChild( this.header,100 );
 
+        this.header.setPosition(0,size.height - 40);
+        this.header.setContentSize(size.width, 40);
+
         this.calclayer = new CalcLayer();
         this.addChild( this.calclayer,100 );
+
+
+        this.calclayer.setPosition(0,size.height - 140);
+        this.calclayer.setContentSize(size.width, 100);
 
 
         this.calclayer.setSumnum( Util.randomInt(10,30) );

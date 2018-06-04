@@ -24,7 +24,6 @@
 
 var res = {
     one_png : "res/FFFFFF-1.png",
-    rubik_fnt : "res/rubik.fnt",
     click_wav: "res/click.wav",
     ding_wav: "res/ding.wav",
     error_wav: "res/error.wav",
