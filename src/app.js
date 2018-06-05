@@ -62,7 +62,7 @@ var HelloWorldLayer = cc.Layer.extend({
 
 
         var blockWidth = 80;
-        var rows = 5;
+        var rows = 6;
         var width = size.width / rows;
 
 
@@ -80,7 +80,7 @@ var HelloWorldLayer = cc.Layer.extend({
 
             for ( var x = 1; x <= rows; x ++ ) {
 
-                var number = Util.randomInt(1,10);
+                var number = Util.randomInt(1,9);
                 var block = new MovingBlock(blockWidth,blockWidth,number,'#FF0000','#FF0000');
 
                 var touchDownFunc = function touchDownFunc( block ) {
