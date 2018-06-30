@@ -1,0 +1,27 @@
+dependencies: \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/platform/ios/cocos2d-prefix.pch \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/cocos/base/CCDataVisitor.cpp \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/CCRef.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/platform/CCPlatformMacros.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/ccConfig.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/platform/CCPlatformConfig.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/platform/CCPlatformDefine.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/platform/ios/CCPlatformDefine-ios.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/deprecated/CCBool.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/CCDataVisitor.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/deprecated/CCInteger.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/CCConsole.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/ccMacros.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/platform/CCStdC.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/platform/ios/CCStdC-ios.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/ccRandom.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/platform/CCCommon.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/deprecated/CCFloat.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/deprecated/CCDouble.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/deprecated/CCString.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/deprecated/CCArray.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/ccCArray.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/ccUTF8.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/deprecated/CCDictionary.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/base/uthash.h \
+  /Users/yauluntang/currymouse/reflezjs/frameworks/cocos2d-x/build/../cocos/deprecated/CCSet.h
