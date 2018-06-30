@@ -43,6 +43,7 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
+    
     // Initialize the CCEAGLView
     CCEAGLView *eaglView = [CCEAGLView viewWithFrame: [UIScreen mainScreen].bounds
                                          pixelFormat: (__bridge NSString *)cocos2d::GLViewImpl::_pixelFormat
@@ -51,9 +52,10 @@
                                           sharegroup: nil
                                        multiSampling: NO
                                      numberOfSamples: 0 ];
+
     
     // Enable or disable multiple touches
-    [eaglView setMultipleTouchEnabled:NO];
+    [eaglView setMultipleTouchEnabled:YES];
     
     // Set EAGLView as view of RootViewController
     self.view = eaglView;

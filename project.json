@@ -13,11 +13,13 @@
 
     "jsList" : [
         "src/resource.js",
-        "src/util.js",
-        "src/blocks.js",
-        "src/header.js",
-        "src/calclayer.js",
-        "src/app.js"
+        "src/common/util.js",
+        "src/calc/blocks.js",
+        "src/calc/header.js",
+        "src/calc/calclayer.js",
+        "src/calc/calcblock.js",
+        "src/calc/app.js",
+        "src/kangaroo/app.js"
 
     ]
 }
