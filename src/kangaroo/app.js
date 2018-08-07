@@ -12,6 +12,42 @@ var KangarooLayer = cc.Layer.extend({
         this.header.setContentSize(size.width, 40);
 
 
+
+
+        this.layer = cc.Layer.create();
+        this.addChild ( this.layer );
+
+
+        this.platform = new Platform();
+        this.platform.setPosition(240,100);
+
+        this.layer.addChild ( this.platform );
+
+
+        var action = cc.MoveBy.create(2,cc.p(-100,0));
+        this.layer.runAction(action);
+
+
+
+
+        this.kangaroo = new Kangaroo();
+        this.kangaroo.setPosition(40,50);
+
+        this.layer.addChild( this.kangaroo );
+
+
+        var action = cc.MoveBy.create(2,cc.p(100,0));
+        this.kangaroo.runAction(action);
+
+/*
+        var action = cc.MoveBy.create(2,cc.p(0,-100));
+        this.layer.runAction(action);
+
+
+        var kanaction = cc.MoveBy.create(2,cc.p(0,100));
+        this.kangaroo.runAction(kanaction);
+*/
+
         return true;
     },
 

@@ -19,7 +19,10 @@
         "src/calc/calclayer.js",
         "src/calc/calcblock.js",
         "src/calc/app.js",
-        "src/kangaroo/app.js"
+        "src/kangaroo/app.js",
+        "src/kangaroo/platform.js",
+        "src/kangaroo/kangaroo.js",
+        "src/kangaroo/layer.js"
 
     ]
 }
