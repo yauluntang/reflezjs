@@ -68,16 +68,7 @@ var HelloWorldLayer = cc.Layer.extend({
 
         if ( this.blockSpawn <= 0 ) {
             this.blockSpawn = 0.8;
-
-
-
-
-
-
             var that = this;
-
-
-
             for ( var x = 1; x <= rows; x ++ ) {
 
                 var number = Util.randomInt(1,9);

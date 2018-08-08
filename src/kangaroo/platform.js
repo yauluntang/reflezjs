@@ -10,6 +10,7 @@ var Platform = cc.Node.extend({
 
         this.sprite = new cc.Sprite(res.ground_png);
         //this.sprite.setScale(width,height);
+        this.sprite.texture.setAliasTexParameters();
 
         //var color = Util.hexToColor( '#00ff00', 255 );
         //this.sprite.setColor(color);

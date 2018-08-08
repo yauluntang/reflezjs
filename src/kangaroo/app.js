@@ -5,6 +5,13 @@ var KangarooLayer = cc.Layer.extend({
         var size = cc.winSize;
         this.scheduleUpdate();
 
+        var bg = cc.Sprite.create(res.bg_png);
+
+        sdkbox.PluginAdMob.init();
+        sdkbox.PluginAdMob.show("home");
+
+
+
         this.header = new HeaderLayer();
         this.addChild( this.header, 100 );
 
@@ -17,9 +24,17 @@ var KangarooLayer = cc.Layer.extend({
         this.layer = cc.Layer.create();
         this.addChild ( this.layer );
 
+        bg.setScale(3);
+        bg.texture.setAliasTexParameters();
+        this.layer.addChild(bg);
+        bg.setPosition(cc.p(0,400));
+
 
         this.platform = new Platform();
-        this.platform.setPosition(240,100);
+        this.platform.setPosition(140,40);
+
+        this.platform.setScale(3);
+
 
         this.layer.addChild ( this.platform );
 
@@ -30,14 +45,18 @@ var KangarooLayer = cc.Layer.extend({
 
 
 
+
+
         this.kangaroo = new Kangaroo();
-        this.kangaroo.setPosition(40,50);
+        this.kangaroo.setPosition(50,130);
 
         this.layer.addChild( this.kangaroo );
 
 
         var action = cc.MoveBy.create(2,cc.p(100,0));
         this.kangaroo.runAction(action);
+
+
 
 /*
         var action = cc.MoveBy.create(2,cc.p(0,-100));

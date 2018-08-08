@@ -1,0 +1,19 @@
+{
+  "name": "reflezjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "cocos run -p web"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yauluntang/reflezjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yauluntang/reflezjs/issues"
+  },
+  "homepage": "https://github.com/yauluntang/reflezjs#readme"
+}

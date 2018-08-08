@@ -45,3 +45,20 @@ Util.prod = function(arr){
     }
     return prod;
 }
+
+Util.getRepeatAnimation = function( file, frames, delay ) {
+    var sframes = [];
+    var texture = cc.textureCache.addImage(file);
+    texture.setAliasTexParameters();
+    for ( var i = 0; i < frames.length; i ++ ){
+        var spriteframe = new cc.SpriteFrame(texture, frames[i] );
+        sframes.push(spriteframe);
+    }
+
+
+    var animation1 = new cc.Animation(sframes, 0.1, 1);
+    var action = cc.Animate.create(animation1);
+    var repeat = cc.RepeatForever.create(action);
+
+    return repeat;
+}
