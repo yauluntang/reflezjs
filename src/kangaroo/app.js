@@ -7,10 +7,17 @@ var KangarooLayer = cc.Layer.extend({
 
         var bg = cc.Sprite.create(res.bg_png);
 
-        sdkbox.PluginAdMob.init();
-        sdkbox.PluginAdMob.show("home");
+        sdkbox.PluginSdkboxAds.init();
+        sdkbox.PluginSdkboxAds.setListener({
+           onAdAction : function(ad_unit_id, zone_location_place_you_name_it, action_type) {
+           cc.log("onAdAction, ad_unit_id: " + String(ad_unit_id) + ", zone_location_place_you_name_it: " + String(zone_location_place_you_name_it) + ", action_type: " + String(action_type));
+           },
+           onRewardAction : function(ad_unit_id, zone_id, reward_amount, reward_succeed) {
+           cc.log("onRewardAction, ad_unit_id: " + String(ad_unit_id) + ", zone_id: " + String(zone_id) + ", reward_amount: " + String(reward_amount) + ", reward_succeed: " + String(reward_succeed));
+           }
+           });
 
-
+        sdkbox.PluginSdkboxAds.playAd("AdMob", "home");
 
         this.header = new HeaderLayer();
         this.addChild( this.header, 100 );

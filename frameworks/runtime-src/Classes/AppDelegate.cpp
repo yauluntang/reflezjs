@@ -49,8 +49,11 @@
 #include "scripting/js-bindings/manual/physics3d/jsb_cocos2dx_physics3d_manual.h"
 #include "scripting/js-bindings/manual/spine/jsb_cocos2dx_spine_manual.h"
 #include "scripting/js-bindings/manual/ui/jsb_cocos2dx_ui_manual.h"
-#include "PluginAdMobJS.hpp"
-#include "PluginAdMobJSHelper.h"
+
+
+#include "PluginSdkboxAdsJS.hpp"
+#include "PluginSdkboxAdsJSHelper.h"
+
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "scripting/js-bindings/auto/jsb_cocos2dx_experimental_video_auto.hpp"
@@ -121,8 +124,6 @@ bool AppDelegate::applicationDidFinishLaunching()
         director->setOpenGLView(glview);
 }
 
-    sc->addRegisterCallback(register_all_PluginAdMobJS);
-    sc->addRegisterCallback(register_all_PluginAdMobJS_helper);
 
 
     // set FPS. the default value is 1.0/60 if you don't call this
@@ -132,6 +133,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     sc->addRegisterCallback(register_all_cocos2dx);
     sc->addRegisterCallback(register_cocos2dx_js_core);
     sc->addRegisterCallback(jsb_register_system);
+    
+    
+    sc->addRegisterCallback(register_all_PluginSdkboxAdsJS);
+    sc->addRegisterCallback(register_all_PluginSdkboxAdsJS_helper);
 
     // extension can be commented out to reduce the package
     sc->addRegisterCallback(register_all_cocos2dx_extension);

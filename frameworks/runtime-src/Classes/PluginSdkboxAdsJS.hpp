@@ -1,16 +1,16 @@
-#pragma once
-#include "base/ccConfig.h"
+#ifndef __PluginSdkboxAdsJS_h__
+#define __PluginSdkboxAdsJS_h__
 
-#include "cocos/scripting/js-bindings/jswrapper/SeApi.h"
+#include "jsapi.h"
+#include "jsfriendapi.h"
 
-extern se::Object* __jsb_sdkbox_PluginSdkboxAds_proto;
-extern se::Class* __jsb_sdkbox_PluginSdkboxAds_class;
 
-bool js_register_sdkbox_PluginSdkboxAds(se::Object* obj);
-bool register_all_PluginSdkboxAdsJS(se::Object* obj);
-SE_DECLARE_FUNC(js_PluginSdkboxAdsJS_PluginSdkboxAds_hideAd);
-SE_DECLARE_FUNC(js_PluginSdkboxAdsJS_PluginSdkboxAds_hide);
-SE_DECLARE_FUNC(js_PluginSdkboxAdsJS_PluginSdkboxAds_placement);
-SE_DECLARE_FUNC(js_PluginSdkboxAdsJS_PluginSdkboxAds_init);
-SE_DECLARE_FUNC(js_PluginSdkboxAdsJS_PluginSdkboxAds_isAvailable);
+#if MOZJS_MAJOR_VERSION >= 33
+void js_register_PluginSdkboxAdsJS_PluginSdkboxAds(JSContext *cx, JS::HandleObject global);
+void register_all_PluginSdkboxAdsJS(JSContext* cx, JS::HandleObject obj);
+#else
+void js_register_PluginSdkboxAdsJS_PluginSdkboxAds(JSContext *cx, JSObject* global);
+void register_all_PluginSdkboxAdsJS(JSContext* cx, JSObject* obj);
+#endif
+#endif
 
