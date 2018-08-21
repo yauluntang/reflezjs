@@ -53,7 +53,8 @@
 
 #include "PluginSdkboxAdsJS.hpp"
 #include "PluginSdkboxAdsJSHelper.h"
-
+#include "PluginAdMobJS.hpp"
+#include "PluginAdMobJSHelper.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "scripting/js-bindings/auto/jsb_cocos2dx_experimental_video_auto.hpp"
@@ -137,6 +138,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     sc->addRegisterCallback(register_all_PluginSdkboxAdsJS);
     sc->addRegisterCallback(register_all_PluginSdkboxAdsJS_helper);
+    sc->addRegisterCallback(register_all_PluginAdMobJS);
+    sc->addRegisterCallback(register_all_PluginAdMobJS_helper);
 
     // extension can be commented out to reduce the package
     sc->addRegisterCallback(register_all_cocos2dx_extension);

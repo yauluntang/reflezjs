@@ -13,7 +13,9 @@ LOCAL_SRC_FILES := hellojavascript/main.cpp \
 ../../../Classes/PluginSdkboxAdsJSHelper.cpp \
 ../../../Classes/PluginSdkboxAdsJSHelper.h \
 ../../../Classes/SDKBoxJSHelper.cpp \
-../../../Classes/SDKBoxJSHelper.h
+../../../Classes/SDKBoxJSHelper.h \
+../../../Classes/PluginAdMobJS.cpp \
+../../../Classes/PluginAdMobJSHelper.cpp
 
 LOCAL_CPPFLAGS := -DSDKBOX_ENABLED \
 -DSDKBOX_COCOS_CREATOR
@@ -22,6 +24,7 @@ LOCAL_LDLIBS := -landroid \
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
 LOCAL_WHOLE_STATIC_LIBRARIES += PluginSdkboxAds
 LOCAL_WHOLE_STATIC_LIBRARIES += sdkbox
+LOCAL_WHOLE_STATIC_LIBRARIES += PluginAdMob
 
 LOCAL_STATIC_LIBRARIES := cocos2d_js_static
 
@@ -35,3 +38,4 @@ $(call import-add-path, $(LOCAL_PATH))
 $(call import-module, cocos/scripting/js-bindings/proj.android)
 $(call import-module, ./sdkbox)
 $(call import-module, ./pluginsdkboxads)
+$(call import-module, ./pluginadmob)

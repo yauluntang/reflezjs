@@ -20,13 +20,21 @@ var Kangaroo = cc.Node.extend({
         }
 
 
+        this.animateObj = Util.getRepeatAnimation(res.rabbit_png, rects, 0.1);
+        this.animateObj.repeat.retain();
+        //this.sprite.runAction(repeat);
 
-        var repeat = Util.getRepeatAnimation(res.rabbit_png, rects, 0.1)
-
-        this.sprite.runAction(repeat);
+        this.sprite.setSpriteFrame(this.animateObj.sframes[0]);
         this.addChild(this.sprite, 0);
 
-
+        this.scheduleUpdate();
+        this.nextTime = 0;
         return true;
-    }
+    },
+    runAnimate: function(){
+      this.sprite.runAction(this.animateObj.repeat);
+    },
+      setFrame: function( frameId ){
+            this.sprite.setSpriteFrame(this.animateObj.sframes[frameId]);
+      }
 });

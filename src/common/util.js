@@ -8,6 +8,13 @@ Util.hexToColor = function(hex, alpha){
         cc.color(parseInt(result[1], 16),parseInt(result[2], 16),parseInt(result[3], 16), alpha != null ? alpha: 255 )
      : null;
 }
+Util.randomCircle = function( radius, dx, dy ){
+  let angle = Math.random() * 2 * Math.PI;
+  let dis = Math.random() * radius;
+  let x = dis * Math.cos( angle ) + dx;
+  let y = dis * Math.sin( angle ) + dy;
+  return cc.p(x,y);
+}
 Util.randomInt = function(min,max) {
     return Math.floor(Math.random() * ( max - min + 1 ) + min);
 }
@@ -56,9 +63,9 @@ Util.getRepeatAnimation = function( file, frames, delay ) {
     }
 
 
-    var animation1 = new cc.Animation(sframes, 0.1, 1);
+    var animation1 = new cc.Animation(sframes, 0.2, 1);
     var action = cc.Animate.create(animation1);
-    var repeat = cc.RepeatForever.create(action);
+    //var repeat = cc.RepeatForever.create(action);
 
-    return repeat;
+    return {repeat:action, sframes: sframes};
 }

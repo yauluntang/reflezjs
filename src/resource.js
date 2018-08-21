@@ -31,8 +31,13 @@ var res = {
     x_png: "res/x-mark-256.png",
     mariokart_mp3: "res/mariokart.mp3",
     ground_png: "res/ground.png",
+    mushroom_png: "res/mushroom.png",
+    mushroomsm_png: "res/mushroom_sm.png",
+    smoke_png: "res/smoke.png",
     rabbit_png: "res/rabbit.png",
-    bg_png: "res/bg.png"
+    bg_png: "res/bg.png",
+    cross_png: "res/cross.png",
+    restart_png: "res/restart.png"
 };
 
 var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.eot","res/JosefinSans-Regular.ttf"], type:"font"}];
