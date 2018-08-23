@@ -107,12 +107,6 @@ var KangarooLayer = cc.Layer.extend({
 
 
 
-/*
-        this.platform = new Platform();
-        this.platform.setPosition(140,140);
-        this.platform.setScale(3);
-        this.layer.addChild ( this.platform );
-*/
 
         this.jump.platformX = 100;
 
@@ -124,39 +118,21 @@ var KangarooLayer = cc.Layer.extend({
 
 
 
-
-        //var action = cc.MoveBy.create(2,cc.p(-100,0));
-        //this.layer.runAction(action);
-
-
-
-
-
-
         this.kangaroo = new Kangaroo();
         this.kangaroo.setPosition(this.jump.platformX, 330);
 
         this.layer.addChild( this.kangaroo );
-        this.jump.currentPlatform = 0;
+        this.jump.currentPlatform = null;
 
-        //var action = cc.MoveBy.create(2,cc.p(100,0));
-        //this.kangaroo.runAction(action);
 
         this.kangaroo.setFrame(2);
 
 
         this.jump.pos = {x: this.jump.platformX, y: 230};
+        this.jump.score = 0;
         this.jump.accel = {x: 0, y: 0};
-        this.jump.static = true;
+        this.jump.static = false;
 
-
-        //var action = cc.MoveBy.create(50,cc.p(-1000,0));
-        //this.layer.runAction(action);
-/*
-
-        var kanaction = cc.MoveBy.create(2,cc.p(0,100));
-        this.kangaroo.runAction(kanaction);
-*/
 
 
         var that = this;
@@ -178,47 +154,17 @@ var KangarooLayer = cc.Layer.extend({
               cc.log('Up');
               that.pressed = false;
               that.jump.power = that.pressedDuration;
-
+              that.jump.static = false;
               that.jump.accel.y = that.jump.power * 3000;
               that.jump.accel.x = 500;
+              that.jump.currentPlatform = null
+
               that.kangaroo.runAnimate();
               that.addSmoke(that.kangaroo.x, that.kangaroo.y, 20);
               that.pressedDuration = 0;
               return true;
             }
         }, that);
-
-
-
-                                    /*
-        cc.eventManager.addListener( cc.EventListener.create({
-                 event: cc.EventListener.TOUCH_ONE_BY_ONE,
-                 swallowTouches: false,
-                 onTouchBegan: function(touch, event) {
-                   cc.log('touch down');
-                   return handleDown.call (that );
-                 },
-                 onTouchMoved: function(touch, event) {
-                   return handleDown.call( that );
-                 },
-                 onTouchEnded: function(touch, event)  {
-                   cc.log('touch up');
-                   return handleUp.call( that );
-                 }
-
-                 }), that );*/
-/*
-        cc.eventManager.addListener( cc.EventListener.create({
-          event:cc.EventListener.MOUSE,
-          onMouseDown: function (event){
-            cc.log('mouse down');
-            return handleDown.call( that );
-          },
-          onMouseUp: function (event){
-            cc.log('mouse up');
-            return handleUp.call( that );
-          }
-        }), this);*/
 
 
         return true;
@@ -228,7 +174,7 @@ var KangarooLayer = cc.Layer.extend({
 
     update: function(dt){
         var size = cc.winSize;
-        this.header.setScore( this.jump.currentPlatform );
+        this.header.setScore( this.jump.score );
         if ( this.pressed ){
           this.pressedDuration += dt;
           if ( this.pressedDuration > 1 ){
@@ -258,72 +204,95 @@ var KangarooLayer = cc.Layer.extend({
 
         //cc.log(this.pressedDuration);
 
-        var x = this.platforms[this.jump.currentPlatform ].x;
-        var y = this.platforms[this.jump.currentPlatform ].y;
+        // Platform Pressing
+        if ( this.status === 'running' && this.jump.currentPlatform ) {
+            var platform = this.jump.currentPlatform;
+            if ( platform ) {
+                var x = platform.x;
+                var y = platform.y;
 
-        if ( this.pressed ){
-          y-= dt * 100;
+                if (this.pressed) {
+                    y -= dt * 100;
+                }
+                platform.setPosition(cc.p(x, y));
+            }
         }
 
 
-        this.platforms[ this.jump.currentPlatform ].setPosition(cc.p(x,y));
 
 
 
 
-        //this.kangaroo.setPosition(50,230-this.pressedDuration);
 
-        this.jump.static = false;
 
-        this.jump.pos.x += this.jump.accel.x * dt;
-        this.jump.pos.y += this.jump.accel.y * dt;
+        if ( this.status === 'running' ) {
+            this.jump.pos.x += this.jump.accel.x * dt;
+            this.jump.pos.y += this.jump.accel.y * dt;
+            if ( this.jump.accel.y < -60 / dt ){
+                this.jump.accel.y = -60 / dt;
+            }
+            if ( this.jump.static ){
+
+                if ( this.jump.currentPlatform ) {
+                    var platform = this.jump.currentPlatform;
+                    if ( platform ) {
+                        this.jump.pos.y = platform.y + 40;
+                        this.jump.accel.y = 0;
+                        this.jump.accel.x = 0;
+                    }
+                }
+            }
+            else {
+                this.jump.accel.y -= 5000 * dt;
+            }
+
+        }
 
         for ( var i = 0; i < this.platforms.length; i ++ ){
-          var platform = this.platforms[i];
+            var platform = this.platforms[i];
 
-          if ( this.jump.pos.x > platform.x - platform.width && this.jump.pos.x < platform.x + platform.width && this.jump.pos.y > platform.y + 10 && this.jump.pos.y < platform.y + 40 ){
-            this.jump.static = true;
-            this.jump.pos.y = platform.y + 40;
-            this.jump.currentPlatform = i;
-          }
+            if ( this.jump.pos.x > platform.x - platform.width && this.jump.pos.x < platform.x + platform.width && this.jump.pos.y > platform.y - 20 && this.jump.pos.y < platform.y + 40 ){
+                this.jump.static = true;
+                this.jump.pos.y = platform.y + 40;
+                this.jump.currentPlatform = platform;
 
-          if ( ( i !== this.jump.currentPlatform || !this.pressed ) && platform.y < platform.platformHeight && platform.x + this.layer.x < 500 ){
-            var x = platform.x;
-            var y = platform.y + 500 * dt;
-            platform.setPosition( cc.p(x,y));
-          }
+                if ( !platform.used ) {
+                    this.jump.score++;
+                    platform.used = true;
+                }
+            }
+
+            if ( ( this.jump.currentPlatform != platform || !this.pressed ) && platform.y < platform.platformHeight && platform.x + this.layer.x < 500 ){
+                var x = platform.x;
+                var y = platform.y + 500 * dt;
+                platform.setPosition( cc.p(x,y));
+            }
+
+            if ( platform.x + this.layer.x < -200 ){
+                this.platforms.splice(i,1);
+                if ( this.jump.currentPlatform === platform ){
+                    this.jump.currentPlatform = null;
+                    this.jump.static = false;
+                }
+                i--;
+                this.layer.removeChild(platform, true);
+            }
         }
 
-        if ( this.jump.static ){
-          this.jump.accel.y = 0;
-          this.jump.accel.x = 0;
-        }
-        else {
-          this.jump.accel.y -= 5000 * dt;
-        }
         this.kangaroo.setPosition(cc.p(this.jump.pos.x,this.jump.pos.y));
 
 
-        /*
-        if ( this.kangaroo.x > this.platform.x - 50 && this.kangaroo.x < this.platform.x + 50 && this.kangaroo.y > this.platform.y && this.kangaroo.y < this.platform.y + 50 ){
-          this.jump.accely = 0;
-        }
-        else {
-          this.jump.accely += 1;
-        }
-
-        this.kangaroo.position.x;*/
+        // Adding Platform
 
 
         if ( this.jump.platformX + this.layer.x < 350 ){
           this.jump.platformX += Util.randomInt( 120,400 );
-
           let height = Util.randomInt( 140,240 );
-
-
           let type = Util.randomInt( 0,1 );
           this.addPlatform( this.jump.platformX, height, type, true );
         }
+
+        // Check Defeat
 
         if ( this.status === 'running' && this.kangaroo.y < - 100 ){
           this.status = 'defeat';

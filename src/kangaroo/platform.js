@@ -17,12 +17,14 @@ var Platform = cc.Node.extend({
         this.platformHeight = height;
         this._super();
         this.type = type;
+
+        this.used = false;
         if ( type === 0 ){
-          this.width = 50;
+          this.width = 55;
           this.sprite = new cc.Sprite(res.ground_png);
         }
         else {
-          this.width = 40;
+          this.width = 45;
           this.sprite = new cc.Sprite(res.mushroom_png);
         }
         let a= Util.randomInt( 0,1 );
@@ -39,14 +41,14 @@ var Platform = cc.Node.extend({
         //this.sprite.setColor(color);
         this.addChild(this.sprite, 0);
 
-        this.scoreLabel = new cc.LabelTTF("", gameFont, 10, 10, cc.TEXT_ALIGNMENT_RIGHT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
+        //this.scoreLabel = new cc.LabelTTF("", gameFont, 10, 10, cc.TEXT_ALIGNMENT_RIGHT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
-        this.addChild( this.scoreLabel );
+        //this.addChild( this.scoreLabel );
         this.scheduleUpdate();
 
         return true;
     },
     update: function(dt){
-      this.scoreLabel.setString( Math.round(this.y));
+      //this.scoreLabel.setString( Math.round(this.y));
     }
 });
