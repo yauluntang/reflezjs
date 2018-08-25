@@ -37,7 +37,7 @@ var TitleLayer = cc.Layer.extend({
             this.addChild( this.helloLabel );
         }
 
-        if ( typeof sdkbox !== 'undefined' ){
+        if ( haveAds && typeof sdkbox !== 'undefined' ){
             sdkbox.PluginAdMob.init();
             sdkbox.PluginAdMob.setListener({
                 adViewDidReceiveAd : function(name) {
@@ -70,7 +70,9 @@ var TitleScene = cc.Scene.extend({
         this._super();
         var layer = new TitleLayer();
         this.addChild(layer);
-        if ( typeof sdkbox !== 'undefined' ){
+
+
+        if ( haveAds && typeof sdkbox !== 'undefined' ){
             sdkbox.PluginAdMob.cache("home");
         }
 

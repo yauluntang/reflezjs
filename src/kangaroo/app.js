@@ -22,8 +22,10 @@ var KangarooLayer = cc.Layer.extend({
       this.platforms.push( platform );
     },
     showDefeatAd: function(){
-        if ( typeof sdkbox !== 'undefined' ){
+        adsNext --;
+        if ( haveAds && typeof sdkbox !== 'undefined' && adsNext <= 0 ){
             sdkbox.PluginAdMob.show('gameover');
+            adsNext = 3;
         }
     },
     ctor:function () {
@@ -32,10 +34,6 @@ var KangarooLayer = cc.Layer.extend({
         this.scheduleUpdate();
         this.status = 'running';
         this.platforms = [];
-
-
-
-
 
 
                                     /*
