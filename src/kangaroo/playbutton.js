@@ -1,6 +1,7 @@
 var PlayButton = cc.Node.extend({
 
     onMenuCallback: function () {
+        cc.audioEngine.playEffect(res.click_wav);
         cc.director.runScene(new KangarooScene());
     },
     ctor: function (normalSprite, activeSprite, callback) {
