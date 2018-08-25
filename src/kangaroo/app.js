@@ -128,11 +128,14 @@ var KangarooLayer = cc.Layer.extend({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             swallowTouches: true,
             onTouchBegan: function(){
-              console.log(that);
-              cc.log('Down');
-              that.pressed = true;
-              that.pressedDuration = 0;
-              return true;
+              if ( that.jump.static ) {
+                  that.pressed = true;
+                  that.pressedDuration = 0;
+                  return true;
+              }
+              else {
+                  return false;
+              }
             },
             onTouchMoved: function(){
 
@@ -140,19 +143,24 @@ var KangarooLayer = cc.Layer.extend({
             onTouchEnded: function(){
               console.log(that);
               cc.log('Up');
-              that.pressed = false;
-              that.jump.power = that.pressedDuration;
-              that.jump.static = false;
-              that.jump.accel.y = that.jump.power * 3000;
-              that.jump.accel.x = 500;
-              that.jump.currentPlatform = null
+              if ( that.pressed ) {
+                  that.pressed = false;
+                  that.jump.power = that.pressedDuration;
+                  that.jump.static = false;
+                  that.jump.accel.y = that.jump.power * 3000;
+                  that.jump.accel.x = 500;
+                  that.jump.currentPlatform = null
 
-              that.kangaroo.runAnimate();
-              that.addSmoke(that.kangaroo.x, that.kangaroo.y, 20);
-              that.pressedDuration = 0;
+                  that.kangaroo.runAnimate();
+                  that.addSmoke(that.kangaroo.x, that.kangaroo.y, 20);
+                  that.pressedDuration = 0;
 
-              cc.audioEngine.playEffect(res.jump_wav);
-              return true;
+                  cc.audioEngine.playEffect(res.jump_wav);
+                  return true;
+              }
+              else {
+                  return false;
+              }
             }
         }, that);
 
