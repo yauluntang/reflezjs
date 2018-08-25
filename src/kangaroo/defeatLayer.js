@@ -43,7 +43,8 @@ var DefeatLayer = cc.Layer.extend({
 
         this.helloLabel = new cc.LabelBMFont( "Record "+record, res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT);
         this.addChild( this.helloLabel );
-        this.helloLabel.texture.setAliasTexParameters();
+
+        //this.helloLabel.texture.setAliasTexParameters();
         this.helloLabel.setScale(2);
         this.helloLabel.setAnchorPoint(0.5,0.5);
         this.helloLabel.setPosition(cc.p( size.width / 2, size.height * 2 / 3 - 130 ) )
@@ -52,7 +53,7 @@ var DefeatLayer = cc.Layer.extend({
 
         this.helloLabel2 = new cc.LabelBMFont( "Score "+score, res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT);
         this.addChild( this.helloLabel2 );
-        this.helloLabel2.texture.setAliasTexParameters();
+        //this.helloLabel2.texture.setAliasTexParameters();
         this.helloLabel2.setScale(2);
         this.helloLabel2.setAnchorPoint(0.5,0.5);
         this.helloLabel2.setPosition(cc.p( size.width / 2, size.height * 2 / 3 - 170 ) )

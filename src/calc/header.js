@@ -18,7 +18,7 @@ var HeaderLayer = cc.Layer.extend({
         this.helloLabel.x = 10;
         this.helloLabel.y = 5;
         //this.helloLabel.setContentSize( size.width, 40 );
-        this.helloLabel.texture.setAliasTexParameters();
+        //this.helloLabel.texture.setAliasTexParameters();
         this.helloLabel.setScale(2);
         this.helloLabel.setAnchorPoint(0,0);
         // add the label as a child to this layer
@@ -29,7 +29,7 @@ var HeaderLayer = cc.Layer.extend({
         //this.helloLabel.setHorizontalAlignment( cc.TEXT_ALIGNMENT_LEFT );
 
         //this.helloLabel.setContentSize( size.width, 40 );
-        this.scoreLabel.texture.setAliasTexParameters();
+        //this.scoreLabel.texture.setAliasTexParameters();
         this.scoreLabel.setScale(2);
         this.scoreLabel.setAnchorPoint(1,0);
         this.scoreLabel.setPosition(size.width-10,5)
