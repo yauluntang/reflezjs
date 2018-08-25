@@ -21,6 +21,11 @@ var KangarooLayer = cc.Layer.extend({
       this.layer.addChild ( platform , -1);
       this.platforms.push( platform );
     },
+    showDefeatAd: function(){
+        if ( typeof sdkbox !== 'undefined' ){
+            sdkbox.PluginAdMob.show('gameover');
+        }
+    },
     ctor:function () {
         this._super();
         var size = cc.winSize;
@@ -30,29 +35,7 @@ var KangarooLayer = cc.Layer.extend({
 
 
 
-        if ( typeof sdkbox !== 'undefined' ){
-            sdkbox.PluginAdMob.init();
-            sdkbox.PluginAdMob.setListener({
-                   adViewDidReceiveAd : function(name) {
-                   cc.log("AdMob adViewDidReceiveAd " + name);
-                        if ( name === 'home' ){
-                            sdkbox.PluginAdMob.show(name);
-                        }
-                   },
-                   adViewDidFailToReceiveAdWithError : function(name, msg) {
-                   cc.log("AdMob adViewDidFailToReceiveAdWithError " + name +":" + msg);
-                   },
-                   adViewWillPresentScreen : function(name) {
-                   cc.log("AdMob adViewWillPresentScreen " + name);
-                   },
-                   adViewDidDismissScreen : function(name) { },
-                   adViewWillDismissScreen : function(name) { },
-                   adViewWillLeaveApplication : function(name) { },
-                   reward: function(name, currency, amount){
 
-                   }
-                   });
-            }
 
 
                                     /*
@@ -318,6 +301,7 @@ var KangarooLayer = cc.Layer.extend({
               cc.sys.localStorage.setItem("Record", this.jump.score);
           }
 
+          this.showDefeatAd();
           var defeatLayer = new DefeatLayer( this.jump.score, this.jump.record );
           this.addChild(defeatLayer);
         }
@@ -359,9 +343,10 @@ var KangarooScene = cc.Scene.extend({
         var layer = new KangarooLayer();
         this.addChild(layer);
         if ( typeof sdkbox !== 'undefined' ){
-                sdkbox.PluginAdMob.cache("home");
-                                    }
-        //sdkbox.PluginAdMob.show("gameover");
+            sdkbox.PluginAdMob.cache("home");
+            sdkbox.PluginAdMob.cache("gameover");
+        }
+        //
                                     /*
                                     sdkbox.PluginSdkboxAds.placement("banners");
                                     sdkbox.PluginSdkboxAds.playAd("AdMob", "home");

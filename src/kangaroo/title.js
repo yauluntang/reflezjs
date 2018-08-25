@@ -2,9 +2,7 @@
 
 var TitleLayer = cc.Layer.extend({
 
-    onMenuCallback: function(){
-        cc.director.runScene(new KangarooScene());
-    },
+
     ctor:function () {
         this._super();
         var size = cc.winSize;
@@ -37,6 +35,30 @@ var TitleLayer = cc.Layer.extend({
             this.helloLabel.setPosition(cc.p( size.width / 2, size.height * 2 / 3 - 150 ) )
 
             this.addChild( this.helloLabel );
+        }
+
+        if ( typeof sdkbox !== 'undefined' ){
+            sdkbox.PluginAdMob.init();
+            sdkbox.PluginAdMob.setListener({
+                adViewDidReceiveAd : function(name) {
+                    cc.log("AdMob adViewDidReceiveAd " + name);
+                    if ( name === 'home' ){
+                        sdkbox.PluginAdMob.show(name);
+                    }
+                },
+                adViewDidFailToReceiveAdWithError : function(name, msg) {
+                    cc.log("AdMob adViewDidFailToReceiveAdWithError " + name +":" + msg);
+                },
+                adViewWillPresentScreen : function(name) {
+                    cc.log("AdMob adViewWillPresentScreen " + name);
+                },
+                adViewDidDismissScreen : function(name) { },
+                adViewWillDismissScreen : function(name) { },
+                adViewWillLeaveApplication : function(name) { },
+                reward: function(name, currency, amount){
+
+                }
+            });
         }
 
         this.addChild( this.playbutton);
