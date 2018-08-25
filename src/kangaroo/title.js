@@ -26,7 +26,7 @@ var TitleLayer = cc.Layer.extend({
 
         var record = cc.sys.localStorage.getItem("Record");
 
-        if ( record !== null || record !== "" ){
+        if ( record !== null && record !== "" ){
             this.helloLabel = new cc.LabelBMFont( "Record "+record, res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT);
             this.addChild( this.helloLabel );
             this.helloLabel.texture.setAliasTexParameters();

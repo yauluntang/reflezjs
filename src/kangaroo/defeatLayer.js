@@ -5,7 +5,7 @@ var DefeatLayer = cc.Layer.extend({
         cc.director.runScene(new KangarooScene());
     },
 
-    ctor:function ( score ) {
+    ctor:function ( score, record ) {
 
         var width = 50;
         var height = 50;
@@ -41,16 +41,13 @@ var DefeatLayer = cc.Layer.extend({
         this.addChild(this.playbutton);
 
 
-        var record = cc.sys.localStorage.getItem("Record");
+        this.helloLabel = new cc.LabelBMFont( "Record "+record, res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT);
+        this.addChild( this.helloLabel );
+        this.helloLabel.texture.setAliasTexParameters();
+        this.helloLabel.setScale(2);
+        this.helloLabel.setAnchorPoint(0.5,0.5);
+        this.helloLabel.setPosition(cc.p( size.width / 2, size.height * 2 / 3 - 130 ) )
 
-        if ( record !== null || record !== "" ){
-            this.helloLabel = new cc.LabelBMFont( "Record "+record, res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT);
-            this.addChild( this.helloLabel );
-            this.helloLabel.texture.setAliasTexParameters();
-            this.helloLabel.setScale(2);
-            this.helloLabel.setAnchorPoint(0.5,0.5);
-            this.helloLabel.setPosition(cc.p( size.width / 2, size.height * 2 / 3 - 130 ) )
-        }
 
 
         this.helloLabel2 = new cc.LabelBMFont( "Score "+score, res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT);

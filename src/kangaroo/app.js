@@ -88,7 +88,7 @@ var KangarooLayer = cc.Layer.extend({
 
 
         var record = cc.sys.localStorage.getItem("Record");
-        if ( record !== null || record !== "" ){
+        if ( record !== null && record !== "" ){
             this.jump.record = parseInt(record);
         }
 
@@ -303,11 +303,14 @@ var KangarooLayer = cc.Layer.extend({
 
         if ( this.status === 'running' && this.kangaroo.y < - 100 ){
           this.status = 'defeat';
-          var defeatLayer = new DefeatLayer( this.jump.score );
+
             cc.audioEngine.playEffect(res.error_wav);
           if ( this.jump.score > this.jump.record ) {
+              this.jump.record = this.jump.score;
               cc.sys.localStorage.setItem("Record", this.jump.score);
           }
+
+          var defeatLayer = new DefeatLayer( this.jump.score, this.jump.record );
           this.addChild(defeatLayer);
         }
 

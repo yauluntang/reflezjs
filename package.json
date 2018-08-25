@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "cocos run -p web"
+    "start": "cocos run -p web",
+    "deploy": "cocos deploy -p web -m release"
   },
   "repository": {
     "type": "git",
