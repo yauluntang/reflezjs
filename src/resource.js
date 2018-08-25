@@ -27,9 +27,10 @@ var res = {
     click_wav: "res/click.wav",
     ding_wav: "res/ding.wav",
     error_wav: "res/error.wav",
+    jump_wav: "res/jump.wav",
     check_png: "res/checkmark-256.png",
     x_png: "res/x-mark-256.png",
-    mariokart_mp3: "res/mariokart.mp3",
+    bunny_mp3: "res/bunnybgmusic.mp3",
     ground_png: "res/ground.png",
     mushroom_png: "res/mushroom.png",
     mushroomsm_png: "res/mushroom_sm.png",
@@ -37,7 +38,14 @@ var res = {
     rabbit_png: "res/rabbit.png",
     bg_png: "res/bg.png",
     cross_png: "res/cross.png",
-    restart_png: "res/restart.png"
+    restart_png: "res/restart.png",
+    playbutton_png: "res/playbutton.png",
+    playbutton_active_png: "res/playbutton_active.png",
+    flower_png: "res/flower.png",
+    carrot_png: "res/carrot.png",
+    nocontinue_fnt: "res/nocontinue.fnt",
+    title_png: "res/title.png",
+    heart_png: "res/heart.png"
 };
 
 var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.eot","res/JosefinSans-Regular.ttf"], type:"font"}];

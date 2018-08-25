@@ -1,5 +1,5 @@
 
-const platformHeight = 140;
+var platformHeight = 140;
 
 var KangarooLayer = cc.Layer.extend({
     sprite:null,
@@ -27,6 +27,7 @@ var KangarooLayer = cc.Layer.extend({
         this.scheduleUpdate();
         this.status = 'running';
         this.platforms = [];
+
 
 
         if ( typeof sdkbox !== 'undefined' ){
@@ -69,30 +70,13 @@ var KangarooLayer = cc.Layer.extend({
         this.header = new HeaderLayer();
         this.addChild( this.header, 100 );
 
-        this.header.setPosition(0,size.height - 40);
-        this.header.setContentSize(size.width, 40);
+        this.header.setPosition(0,size.height - 50);
+        this.header.setContentSize(size.width, 50);
 
 
         this.jump = {};
-
-        this.bglayer = cc.Layer.create();
-
-        this.bg = cc.Sprite.create(res.bg_png);
-        this.bg.setScale(3);
-        this.bg.texture.setAliasTexParameters();
-        this.bg.setAnchorPoint(cc.p(0,0));
-        this.bg.setPosition(cc.p(1440,0));
-        this.bglayer.addChild(this.bg);
-
-
-        this.bg2 = cc.Sprite.create(res.bg_png);
-        this.bg2.setPosition(cc.p(0,0));
-        this.bg2.texture.setAliasTexParameters();
-        this.bg2.setAnchorPoint(cc.p(0,0));
-        this.bg2.setScale(3);
-        this.bglayer.addChild(this.bg2);
-
-        this.bgscroll = 0;
+        this.jump.record = 0;
+        this.bglayer = new BGLayer();
 
 
         this.addChild(this.bglayer);
@@ -103,14 +87,16 @@ var KangarooLayer = cc.Layer.extend({
         this.addChild ( this.layer );
 
 
+        var record = cc.sys.localStorage.getItem("Record");
+        if ( record !== null || record !== "" ){
+            this.jump.record = parseInt(record);
+        }
 
 
 
+        this.jump.platformX = 400;
 
-
-        this.jump.platformX = 100;
-
-        this.addPlatform( 100, platformHeight, 0 );
+        this.addPlatform( this.jump.platformX, platformHeight, 0 );
         this.pressed = false;
         this.pressedDuration = 0;
 
@@ -128,7 +114,9 @@ var KangarooLayer = cc.Layer.extend({
         this.kangaroo.setFrame(2);
 
 
-        this.jump.pos = {x: this.jump.platformX, y: 230};
+        this.jump.pos = {x: this.jump.platformX, y: 330};
+        this.jump.prepos = {x: this.jump.platformX, y: 330};
+
         this.jump.score = 0;
         this.jump.accel = {x: 0, y: 0};
         this.jump.static = false;
@@ -162,6 +150,8 @@ var KangarooLayer = cc.Layer.extend({
               that.kangaroo.runAnimate();
               that.addSmoke(that.kangaroo.x, that.kangaroo.y, 20);
               that.pressedDuration = 0;
+
+              cc.audioEngine.playEffect(res.jump_wav);
               return true;
             }
         }, that);
@@ -185,24 +175,15 @@ var KangarooLayer = cc.Layer.extend({
           this.pressedDuration=0;
         }
 
-        var layerX = this.layer.x - dt * 50;
+        // Moving Layer
+        var layerX = this.layer.x - dt * 100;
         var layerY = this.layer.y;
         this.layer.setPosition(cc.p(layerX,layerY));
 
-        var bglayerX = this.bglayer.x - dt * 20;
-        var bglayerY = this.bglayer.y;
-        this.bglayer.setPosition(cc.p(bglayerX,bglayerY));
-
-        this.bgscroll += dt * 20;
-
-        if ( this.bgscroll > 1440 ){
-          this.bgscroll -= 1440;
-          this.bg.setPosition(cc.p(this.bg.x+1440,this.bg.y));
-          this.bg2.setPosition(cc.p(this.bg2.x+1440,this.bg2.y));
-        }
 
 
-        //cc.log(this.pressedDuration);
+
+
 
         // Platform Pressing
         if ( this.status === 'running' && this.jump.currentPlatform ) {
@@ -226,17 +207,23 @@ var KangarooLayer = cc.Layer.extend({
 
 
         if ( this.status === 'running' ) {
+
+            this.jump.prepos.x = this.jump.pos.x;
+            this.jump.prepos.y = this.jump.pos.y;
+
             this.jump.pos.x += this.jump.accel.x * dt;
             this.jump.pos.y += this.jump.accel.y * dt;
+            /*
             if ( this.jump.accel.y < -60 / dt ){
                 this.jump.accel.y = -60 / dt;
-            }
-            if ( this.jump.static ){
+            }*/
 
+
+            if ( this.jump.static ){
                 if ( this.jump.currentPlatform ) {
                     var platform = this.jump.currentPlatform;
                     if ( platform ) {
-                        this.jump.pos.y = platform.y + 40;
+                        this.jump.pos.y = platform.y + 35;
                         this.jump.accel.y = 0;
                         this.jump.accel.x = 0;
                     }
@@ -251,23 +238,43 @@ var KangarooLayer = cc.Layer.extend({
         for ( var i = 0; i < this.platforms.length; i ++ ){
             var platform = this.platforms[i];
 
-            if ( this.jump.pos.x > platform.x - platform.width && this.jump.pos.x < platform.x + platform.width && this.jump.pos.y > platform.y - 20 && this.jump.pos.y < platform.y + 40 ){
+            // Check intersection
+
+
+            var p1s = cc.p( this.jump.prepos.x, this.jump.prepos.y );
+            var p1e = cc.p( this.jump.pos.x, this.jump.pos.y );
+
+            var p2s = cc.p( platform.x - platform.width, platform.y + 35);
+            var p2e = cc.p( platform.x + platform.width, platform.y + 35);
+
+            var result = Util.checkLineIntersection(p1s, p1e, p2s, p2e );
+
+            if ( result ){
+
+
                 this.jump.static = true;
-                this.jump.pos.y = platform.y + 40;
+                this.jump.pos.x = result.x;
+                this.jump.pos.y = result.y;
                 this.jump.currentPlatform = platform;
 
                 if ( !platform.used ) {
                     this.jump.score++;
                     platform.used = true;
+                    cc.audioEngine.playEffect(res.ding_wav);
+                    this.addHeart( this.kangaroo.x, this.kangaroo.y, 2);
                 }
             }
 
+
+            // Platform raising
             if ( ( this.jump.currentPlatform != platform || !this.pressed ) && platform.y < platform.platformHeight && platform.x + this.layer.x < 500 ){
                 var x = platform.x;
                 var y = platform.y + 500 * dt;
                 platform.setPosition( cc.p(x,y));
             }
 
+
+            // Platform disappearing
             if ( platform.x + this.layer.x < -200 ){
                 this.platforms.splice(i,1);
                 if ( this.jump.currentPlatform === platform ){
@@ -287,8 +294,8 @@ var KangarooLayer = cc.Layer.extend({
 
         if ( this.jump.platformX + this.layer.x < 350 ){
           this.jump.platformX += Util.randomInt( 120,400 );
-          let height = Util.randomInt( 140,240 );
-          let type = Util.randomInt( 0,1 );
+          var height = Util.randomInt( 140,240 );
+          var type = Util.randomInt( 0,1 );
           this.addPlatform( this.jump.platformX, height, type, true );
         }
 
@@ -296,24 +303,42 @@ var KangarooLayer = cc.Layer.extend({
 
         if ( this.status === 'running' && this.kangaroo.y < - 100 ){
           this.status = 'defeat';
-          var defeatLayer = new DefeatLayer();
+          var defeatLayer = new DefeatLayer( this.jump.score );
+            cc.audioEngine.playEffect(res.error_wav);
+          if ( this.jump.score > this.jump.record ) {
+              cc.sys.localStorage.setItem("Record", this.jump.score);
+          }
           this.addChild(defeatLayer);
         }
 
     },
     addSmoke: function(x, y, count){
 
-      for ( let i = 0; i < count; i ++ ){
-        console.log('adding smoke')
-        let smoke = new cc.Sprite( res.smoke_png );
-        let moveBy = cc.moveBy( 1, Util.randomCircle(30,-50,0) );
-        let moveFade = cc.spawn( moveBy, cc.fadeOut(1) ).easing(cc.easeExponentialOut());
-        let seq = cc.sequence( moveFade, cc.removeSelf() );
+      for ( var i = 0; i < count; i ++ ){
+        var smoke = new cc.Sprite( res.smoke_png );
+        var moveBy = cc.moveBy( 1, Util.randomCircle(30,-50,0) );
+        var moveFade = cc.spawn( moveBy, cc.fadeOut(1) ).easing(cc.easeExponentialOut());
+        var seq = cc.sequence( moveFade, cc.removeSelf() );
         smoke.setScale(3);
+        smoke.texture.setAliasTexParameters();
         smoke.runAction(seq);
         smoke.setPosition( cc.p(x,y));
         this.layer.addChild( smoke );
       }
+    },
+    addHeart: function(x, y, count){
+
+        for ( var i = 0; i < count; i ++ ){
+            var smoke = new cc.Sprite( res.heart_png );
+            var moveBy = cc.moveBy( 2, cc.p(0,20) );
+            var moveFade = cc.spawn( moveBy, cc.fadeOut(2) ).easing(cc.easeExponentialOut());
+            var seq = cc.sequence( moveFade, cc.removeSelf() );
+            smoke.setScale(2);
+            smoke.texture.setAliasTexParameters();
+            smoke.runAction(seq);
+            smoke.setPosition( cc.p(x,y));
+            this.layer.addChild( smoke );
+        }
     }
 });
 
