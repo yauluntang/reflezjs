@@ -805,7 +805,7 @@
 					"-DSDKBOX_COCOS_CREATOR",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.currymouse.reflezjs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.currymouse.reflez;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -843,7 +843,7 @@
 					"-DSDKBOX_COCOS_CREATOR",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.currymouse.reflezjs;
+				PRODUCT_BUNDLE_IDENTIFIER = com.currymouse.reflez;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
