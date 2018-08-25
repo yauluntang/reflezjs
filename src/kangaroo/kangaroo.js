@@ -32,7 +32,8 @@ var Kangaroo = cc.Node.extend({
         return true;
     },
     runAnimate: function(){
-      this.sprite.runAction(this.animateObj.repeat);
+        this.sprite.stopAction(this.animateObj.repeat);
+        this.sprite.runAction(this.animateObj.repeat);
     },
       setFrame: function( frameId ){
             this.sprite.setSpriteFrame(this.animateObj.sframes[frameId]);
