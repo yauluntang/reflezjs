@@ -12,24 +12,24 @@ var HeaderLayer = cc.Layer.extend({
         //this.helloLabel = new cc.LabelTTF("Bunny Jump", gameFont, size.width/10, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT, cc.VERTICAL_TEXT_ALIGNMENT_CENTER);
 
 
-        this.helloLabel = new cc.LabelBMFont("Bunny", res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT);
+        this.helloLabel = new cc.LabelBMFont("Bunny", res.nocontinue_fnt);
 
         //this.helloLabel.setHorizontalAlignment( cc.TEXT_ALIGNMENT_LEFT );
         this.helloLabel.x = 10;
         this.helloLabel.y = 5;
         //this.helloLabel.setContentSize( size.width, 40 );
-        //this.helloLabel.texture.setAliasTexParameters();
+        this.helloLabel.texture.setAliasTexParameters();
         this.helloLabel.setScale(2);
         this.helloLabel.setAnchorPoint(0,0);
         // add the label as a child to this layer
         this.addChild(this.helloLabel, 200);
 
 
-        this.scoreLabel = new cc.LabelBMFont("", res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_RIGHT);
+        this.scoreLabel = new cc.LabelBMFont("", res.nocontinue_fnt);
         //this.helloLabel.setHorizontalAlignment( cc.TEXT_ALIGNMENT_LEFT );
 
         //this.helloLabel.setContentSize( size.width, 40 );
-        //this.scoreLabel.texture.setAliasTexParameters();
+        this.scoreLabel.texture.setAliasTexParameters();
         this.scoreLabel.setScale(2);
         this.scoreLabel.setAnchorPoint(1,0);
         this.scoreLabel.setPosition(size.width-10,5)

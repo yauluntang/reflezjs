@@ -27,12 +27,16 @@ var TitleLayer = cc.Layer.extend({
         var record = cc.sys.localStorage.getItem("Record");
 
         if ( record !== null && record !== "" ){
-            this.helloLabel = new cc.LabelBMFont( "Record "+record, res.nocontinue_fnt, cc.size(size.width * 2 - 20, 80), cc.TEXT_ALIGNMENT_LEFT);
-            this.addChild( this.helloLabel );
-            this.helloLabel.texture.setAliasTexParameters();
+            this.helloLabel = new cc.LabelBMFont( "Record "+record, res.nocontinue_fnt);
+
+
             this.helloLabel.setScale(2);
+
+            this.helloLabel.texture.setAliasTexParameters();
             this.helloLabel.setAnchorPoint(0.5,0.5);
             this.helloLabel.setPosition(cc.p( size.width / 2, size.height * 2 / 3 - 150 ) )
+
+            this.addChild( this.helloLabel );
         }
 
         this.addChild( this.playbutton);
