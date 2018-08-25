@@ -108,12 +108,12 @@ cc.game.onStart = function(){
     var height = cc.winSize.height;
 
 
-    /*
+    
     if ( sys.os === sys.OS_IOS ) {
         var rect = cc.view.getSafeAreaRect();
         width = rect.width;
         height = rect.height;
-    }*/
+    }
 
     if( !sys.isNative ){
         //width = window.innerWidth;
