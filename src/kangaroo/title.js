@@ -30,7 +30,7 @@ var TitleLayer = cc.Layer.extend({
 
             this.helloLabel.setScale(2);
 
-            this.helloLabel.texture.setAliasTexParameters();
+            //this.helloLabel.texture.setAliasTexParameters();
             this.helloLabel.setAnchorPoint(0.5,0.5);
             this.helloLabel.setPosition(cc.p( size.width / 2, size.height * 2 / 3 - 150 ) )
 
