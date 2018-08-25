@@ -77,6 +77,11 @@
  */
 
 var gameFont = 'Josefin Sans';
+
+var haveAds = false;
+
+var adsNext = 3;
+
 cc.game.onStart = function(){
     var sys = cc.sys;
     if(!sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
