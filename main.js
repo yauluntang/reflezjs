@@ -78,7 +78,7 @@
 
 var gameFont = 'Josefin Sans';
 
-var haveAds = false;
+var haveAds = true;
 
 var adsNext = 3;
 
