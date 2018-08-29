@@ -34,6 +34,7 @@
 		9F2BC0B9211BC826009D7FF8 /* PluginSdkboxAdsJSHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BC0B3211BC825009D7FF8 /* PluginSdkboxAdsJSHelper.cpp */; };
 		9F2BC0BA211BC826009D7FF8 /* PluginSdkboxAdsJS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BC0B6211BC826009D7FF8 /* PluginSdkboxAdsJS.cpp */; };
 		9F2BC0BB211BC826009D7FF8 /* SDKBoxJSHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F2BC0B8211BC826009D7FF8 /* SDKBoxJSHelper.cpp */; };
+		9F4CB11B2133A79F007C22C1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4CB11A2133A79E007C22C1 /* Default-568h@2x.png */; };
 		9FA3AE461BE9BBCA00FC9645 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA3AE451BE9BBCA00FC9645 /* GameController.framework */; };
 		A2B24C66BBDC849E57FA99B4 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF6469CA43874FBB5A76E8F /* EventKit.framework */; };
 		A92275421517C094001B78AA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92275411517C094001B78AA /* QuartzCore.framework */; };
@@ -164,6 +165,7 @@
 		9F2BC0B7211BC826009D7FF8 /* SDKBoxJSHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKBoxJSHelper.h; sourceTree = "<group>"; };
 		9F2BC0B8211BC826009D7FF8 /* SDKBoxJSHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SDKBoxJSHelper.cpp; sourceTree = "<group>"; };
 		9F474A5F863AB113EA376F69 /* PluginAdMobJS.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginAdMobJS.hpp; path = ../Classes/PluginAdMobJS.hpp; sourceTree = SOURCE_ROOT; };
+		9F4CB11A2133A79E007C22C1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "ios/Default-568h@2x.png"; sourceTree = "<group>"; };
 		9FA3AE451BE9BBCA00FC9645 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		A3914075B9D9704B477A6AA6 /* PluginAdMobJSHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginAdMobJSHelper.h; path = ../Classes/PluginAdMobJSHelper.h; sourceTree = SOURCE_ROOT; };
 		A3924D798897847B5AD5EF8E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
@@ -253,6 +255,7 @@
 		15628F5B15F0F5C2000CF24B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F4CB11A2133A79E007C22C1 /* Default-568h@2x.png */,
 				1A1A081B18C9DF05005C6854 /* project.json */,
 				1A6BF21418C9DB5900FB0E1C /* main.js */,
 				C0799CB518BAE62000E9C828 /* res */,
@@ -516,6 +519,7 @@
 			files = (
 				BAF426FB19484B3E002B22EF /* script in Resources */,
 				1A2EA1861FC3DA6C0062C870 /* Images.xcassets in Resources */,
+				9F4CB11B2133A79F007C22C1 /* Default-568h@2x.png in Resources */,
 				1AE159EC18C9DF3600FCA372 /* project.json in Resources */,
 				1AD7E0A818C9DB93004817A6 /* main.js in Resources */,
 				1AF87B9D1F6F7C80007BE51C /* LaunchScreen.storyboard in Resources */,
@@ -615,6 +619,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = FMEPD3AH5U;
@@ -654,6 +659,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = FMEPD3AH5U;

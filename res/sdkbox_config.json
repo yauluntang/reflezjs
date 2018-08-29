@@ -12,7 +12,7 @@
                     "units": [
                         {
                             "unit": "AdMob",
-                            "name": "home",
+                            "name": "Banner",
                             "weight": 100
                         }
                     ],
@@ -29,12 +29,12 @@
             "ads": {
                 "gameover": {
                     "type": "interstitial",
-                    "id": "ca-app-pub-1329374026572143/1092476511"
+                    "id": "ca-app-pub-6830716067076567/5113579085"
                 },
                 "home": {
                     "width": 300,
                     "type": "banner",
-                    "id": "ca-app-pub-1329374026572143/2685130917",
+                    "id": "ca-app-pub-6830716067076567/3297525417",
                     "alignment": "bottom",
                     "height": 100
                 }
@@ -53,7 +53,7 @@
                     "units": [
                         {
                             "unit": "AdMob",
-                            "name": "home",
+                            "name": "Banner",
                             "weight": 100
                         }
                     ],
@@ -76,7 +76,7 @@
                 "home": {
                     "width": 320,
                     "type": "banner",
-                    "id" : "ca-app-pub-3940256099942544/6300978111",
+                    "id" : "ca-app-pub-6830716067076567/5725861757",
                     "alignment": "bottom",
                     "height": 50
                 }

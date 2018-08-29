@@ -1,4 +1,4 @@
-Executable : /Users/yauluntang/Library/Android/sdk/ndk-bundle/ndk-build
+Executable : /Users/yauluntang/android-ndk-r16b/ndk-build
 arguments : 
 NDK_PROJECT_PATH=null
 APP_BUILD_SCRIPT=/Users/yauluntang/currymouse/reflezjs/frameworks/runtime-src/proj.android/app/jni/Android.mk
