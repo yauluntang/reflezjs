@@ -27,6 +27,24 @@ Util.randomIntMult = function(min,max,count) {
     }
     return chosen;
 }
+Util.getRandomCard = function(arr) {
+    var cards = [];
+    if ( !arr || !arr.length ){
+        return 0;
+    }
+
+    for ( var i = 0; i < arr.length; i ++ ){
+        if ( arr[i].length === 2 ) {
+            for (var j = 0; j < arr[i][1]; j++) {
+                cards.push(arr[i][0]);
+            }
+        }
+    }
+    var pick = Util.randomInt(0,cards.length-1);
+    console.log(cards);
+    console.log(cards[pick]);
+    return cards[pick];
+}
 Util.chooseNum = function(arr,count) {
     var newarr = arr.slice(0);
     var chosen = [];

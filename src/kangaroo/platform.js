@@ -3,19 +3,32 @@ var Platform = cc.Node.extend({
 
     addMush: function(x) {
       //var mush = new cc.Sprite(res.mushroomsm_png);
-        var mush = new cc.Sprite(res.flower_png);
-      //var x = Util.randomInt( -6,6 );
+        var mush;
+        if ( this.type === 0 ){
+            mush = new cc.Sprite(res.rocksm_png);
+        }
+        else if ( this.type === 1 ){
+            mush = new cc.Sprite(res.flower_png);
+        }
+        else if ( this.type === 2 ){
+            mush = new cc.Sprite(res.mushroomsm_png);
+        }
+        else {
+            return;
+        }
+
       var y = Util.randomInt( -2,0 );
       mush.setPosition(x,y);
       mush.setAnchorPoint(0.5,0);
       mush.texture.setAliasTexParameters();
-
-      mush.setSkewX(5);
-
-      var seq = cc.sequence([ cc.skewBy(1,-10,0).easing(cc.easeSineOut()) , cc.skewBy(1,10,0).easing(cc.easeSineOut()) ]);
-      mush.runAction(cc.repeatForever(seq));
-
       this.addChild(mush);
+      if ( this.type === 1 || this.type === 2 ) {
+          mush.setSkewX(5);
+          var seq = cc.sequence([cc.skewBy(1, -10, 0).easing(cc.easeSineOut()), cc.skewBy(1, 10, 0).easing(cc.easeSineOut())]);
+          mush.runAction(cc.repeatForever(seq));
+
+
+      }
     },
     ctor:function ( type, height ) {
 
@@ -27,12 +40,20 @@ var Platform = cc.Node.extend({
 
         this.used = false;
         if ( type === 0 ){
+          this.width = 80;
+          this.sprite = new cc.Sprite(res.rock_png);
+        }
+        else if ( type === 1 ){
           this.width = 50;
           this.sprite = new cc.Sprite(res.ground_png);
         }
+        else if ( type === 2 ){
+            this.width = 35;
+            this.sprite = new cc.Sprite(res.mushroom_png);
+        }
         else {
-          this.width = 35;
-          this.sprite = new cc.Sprite(res.mushroom_png);
+            this.width = 30;
+            this.sprite = new cc.Sprite(res.flowerplat_png);
         }
         var a= Util.randomInt( 0,4 );
         var startx = Util.randomInt(-this.width / 4, this.width/4);

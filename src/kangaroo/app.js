@@ -131,7 +131,7 @@ var KangarooLayer = cc.Layer.extend({
                   that.jump.accel.y = that.jump.power * 3000;
                   that.jump.accel.x = 500;
                   that.jump.currentPlatform = null
-
+                  that.jump.pos.y += 20;
                   that.kangaroo.runAnimate();
                   that.addSmoke(that.kangaroo.x, that.kangaroo.y, 20);
                   that.pressedDuration = 0;
@@ -281,10 +281,26 @@ var KangarooLayer = cc.Layer.extend({
         // Adding Platform
 
 
-        if ( this.jump.platformX + this.layer.x < 350 ){
-          this.jump.platformX += Util.randomInt( 120,400 );
-          var height = Util.randomInt( 140,240 );
-          var type = Util.randomInt( 0,1 );
+        if ( this.jump.platformX + this.layer.x < 450 ){
+          this.jump.platformX += Util.randomInt( 180,420 );
+          var height = Util.randomInt( 160,220 );
+
+          var type;
+          if ( this.jump.score < 10 ) {
+             type = Util.getRandomCard([[0, 2], [1, 1]]);
+          }
+          else if ( this.jump.score < 20 ) {
+              type = Util.getRandomCard([[0, 1], [1, 2]]);
+          }
+          else if ( this.jump.score < 30 ) {
+              type = Util.getRandomCard([[0, 2], [2, 2], [3, 1]]);
+          }
+          else if ( this.jump.score < 40 ) {
+              type = Util.getRandomCard([[0, 1], [2, 2], [3, 2]]);
+          }
+          else {
+              type = Util.getRandomCard([[0, 1], [1, 1], [2, 5], [3, 5]]);
+          }
           this.addPlatform( this.jump.platformX, height, type, true );
         }
 

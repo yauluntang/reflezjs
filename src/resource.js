@@ -45,7 +45,10 @@ var res = {
     carrot_png: "res/carrot.png",
     nocontinue_fnt: "res/nocontinue.fnt",
     title_png: "res/title.png",
-    heart_png: "res/heart.png"
+    heart_png: "res/heart.png",
+    rock_png: "res/rock.png",
+    rocksm_png: "res/rock_sm.png",
+    flowerplat_png: "res/flower_platform.png"
 };
 
 var g_resources = [{name:"Josefin Sans", srcs:["res/JosefinSans-Regular.eot","res/JosefinSans-Regular.ttf"], type:"font"}];
