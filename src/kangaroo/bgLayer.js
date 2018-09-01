@@ -23,6 +23,7 @@ var BGLayer = cc.Layer.extend({
         this.bglayer.addChild(this.bg2);
 
         this.bgscroll = 0;
+        this.moving = true;
 
         this.addChild(this.bglayer);
 
@@ -31,15 +32,21 @@ var BGLayer = cc.Layer.extend({
 
     update: function(dt) {
         // Moving Background
-        var bglayerX = this.bglayer.x - dt * 20;
-        var bglayerY = this.bglayer.y;
-        this.bglayer.setPosition(cc.p(bglayerX,bglayerY));
-        this.bgscroll += dt * 20;
-        if ( this.bgscroll > 1440 ){
-            this.bgscroll -= 1440;
-            this.bg.setPosition(cc.p(this.bg.x+1440,this.bg.y));
-            this.bg2.setPosition(cc.p(this.bg2.x+1440,this.bg2.y));
+        if ( this.moving ) {
+            var bglayerX = this.bglayer.x - dt * 20;
+            var bglayerY = this.bglayer.y;
+            this.bglayer.setPosition(cc.p(bglayerX, bglayerY));
+            this.bgscroll += dt * 20;
+            if (this.bgscroll > 1440) {
+                this.bgscroll -= 1440;
+                this.bg.setPosition(cc.p(this.bg.x + 1440, this.bg.y));
+                this.bg2.setPosition(cc.p(this.bg2.x + 1440, this.bg2.y));
+            }
         }
+    },
+
+    stopMoving: function(){
+         this.moving = false;
     }
 
 

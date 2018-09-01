@@ -165,9 +165,12 @@ var KangarooLayer = cc.Layer.extend({
         }
 
         // Moving Layer
-        var layerX = this.layer.x - dt * 100;
-        var layerY = this.layer.y;
-        this.layer.setPosition(cc.p(layerX,layerY));
+
+        if ( this.status === 'running' ) {
+            var layerX = this.layer.x - dt * 100;
+            var layerY = this.layer.y;
+            this.layer.setPosition(cc.p(layerX, layerY));
+        }
 
 
 
