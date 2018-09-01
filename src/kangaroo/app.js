@@ -130,7 +130,8 @@ var KangarooLayer = cc.Layer.extend({
                   that.jump.static = false;
                   that.jump.accel.y = that.jump.power * 3000;
                   that.jump.accel.x = 500;
-                  that.jump.currentPlatform = null
+                  that.jump.pos.y += 20;
+                  that.jump.currentPlatform = null;
 
                   that.kangaroo.runAnimate();
                   that.addSmoke(that.kangaroo.x, that.kangaroo.y, 20);
@@ -298,7 +299,7 @@ var KangarooLayer = cc.Layer.extend({
           else {
             type = Util.getRandomCard([[1,1],[2,4],[3,4]]);
           }
-        
+
           this.addPlatform( this.jump.platformX, height, type, true );
         }
 
