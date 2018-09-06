@@ -2,28 +2,35 @@
 var Kangaroo = cc.Node.extend({
 
 
-    ctor:function ( ) {
+    ctor:function ( selectRabbit, direction ) {
 
         var width = 50;
         var height = 50;
         this._super();
 
+        if ( typeof direction === 'undefined' || direction === null ){
+            direction = 2;
+        }
+        if ( typeof selectRabbit === 'undefined' || selectRabbit === null ){
+            selectRabbit = 0;
+        }
+
         this.sprite = new cc.Sprite();
         //this.sprite.setScale(width,height);
         this.sprite.setScale(3);
 
-        var select = Util.randomInt(0,7);
 
 
-        var x = select % 4;
-        var y = Math.floor( select / 4 );
 
-        cc.log( "Rabbit Choice "+ select+","+ x+","+y);
+        var x = selectRabbit % 4;
+        var y = Math.floor( selectRabbit / 4 );
+
+        cc.log( "Rabbit Choice "+ selectRabbit+","+ x+","+y);
 
 
         var rects = [];
         for ( var i = 0; i < 3; i ++ ){
-            rects.push(cc.rect(i*32+1 + 32*3*x ,1 + 32*y,31,31));
+            rects.push(cc.rect(i*32+1 + 32*3*x, 1 + 128*y + 32 * direction,31,31));
         }
 
 

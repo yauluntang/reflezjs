@@ -50,6 +50,7 @@ var KangarooLayer = cc.Layer.extend({
 
         this.header = new HeaderLayer();
         this.addChild( this.header, 100 );
+        this.header.setTitle('Cliff-Jump');
 
         this.header.setPosition(0,size.height - 50);
         this.header.setContentSize(size.width, 50);

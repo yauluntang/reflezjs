@@ -9,7 +9,7 @@ var TitleLayer = cc.Layer.extend({
         this.bglayer = new BGLayer();
         this.addChild(this.bglayer);
 
-        setTimeout(function(){cc.audioEngine.playMusic(res.bunny_mp3, true)},2000);
+        //setTimeout(function(){cc.audioEngine.playMusic(res.bunny_mp3, true)},2000);
 
         this.title = new cc.Sprite(res.title_png);
         this.addChild(this.title);

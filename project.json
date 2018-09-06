@@ -16,7 +16,7 @@
         "src/common/util.js",
         "src/common/button.js",
         "src/calc/blocks.js",
-        "src/calc/header.js",
+        "src/common/header.js",
         "src/calc/calclayer.js",
         "src/calc/calcblock.js",
         "src/calc/app.js",
