@@ -15,19 +15,8 @@
         "src/resource.js",
         "src/common/util.js",
         "src/common/button.js",
-        "src/calc/blocks.js",
         "src/common/header.js",
-        "src/calc/calclayer.js",
-        "src/calc/calcblock.js",
-        "src/calc/app.js",
-        "src/kangaroo/title.js",
-        "src/kangaroo/playbutton.js",
-        "src/kangaroo/defeatLayer.js",
-        "src/kangaroo/bgLayer.js",
-        "src/kangaroo/app.js",
-        "src/kangaroo/platform.js",
-        "src/kangaroo/kangaroo.js",
-        "src/kangaroo/layer.js"
+        "src/maze/app.js"
 
 
     ]

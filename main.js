@@ -113,7 +113,7 @@ cc.game.onStart = function(){
     var height = cc.winSize.height;
 
 
-    
+
     if ( sys.os === sys.OS_IOS ) {
         var rect = cc.view.getSafeAreaRect();
         width = rect.width;
@@ -136,7 +136,7 @@ cc.game.onStart = function(){
 
     //load resources
     cc.LoaderScene.preload(g_resources, function () {
-        cc.director.runScene(new TitleScene());
+        cc.director.runScene(new MazeScene());
     }, this);
 };
 cc.game.run();
